@@ -3,28 +3,30 @@ const mainEl = document.querySelector(".main-container");
 const counterEl = document.querySelector("#counter");
 const btnNext = document.querySelector(".nextBtn");
 const btnPrev = document.querySelector(".prevBtn");
-
-mainEl.style.backgroundColor = "#333333";
-
-function updateCounter() {
-    if(Number(counterEl.innerText) > 0) {
-        mainEl.style.backgroundColor = "green";
-    } else if(Number(counterEl.innerText) === 0) {
-        mainEl.style.backgroundColor = "#333333";
-    } else {
-        mainEl.style.backgroundColor = "red";
-    }
-}
+let count = 0;
 
 btnNext.addEventListener("click", () => {
-    counterEl.innerText = Number(counterEl.innerText) + 1;
+    count++;
     updateCounter();
 });
 
 btnPrev.addEventListener("click", () => {
-    counterEl.innerText = Number(counterEl.innerText) - 1;
+    count--;
     updateCounter();
 });
+
+function updateCounter() {
+    counterEl.innerText = count;
+    if(Number(counterEl.innerText) > 0) {
+        counterEl.style.color = "green";
+    } else if(Number(counterEl.innerText) === 0) {
+        counterEl.style.color = "#333333";
+    } else {
+        counterEl.style.color = "red";
+    }
+}
+
+
 
 
 
