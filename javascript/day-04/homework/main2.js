@@ -17,9 +17,9 @@ btnPrev.addEventListener("click", () => {
 
 function updateCounter() {
     counterEl.innerText = count;
-    if(Number(counterEl.innerText) > 0) {
+    if(count > 0) {
         counterEl.style.color = "green";
-    } else if(Number(counterEl.innerText) === 0) {
+    } else if(count === 0) {
         counterEl.style.color = "#333333";
     } else {
         counterEl.style.color = "red";
