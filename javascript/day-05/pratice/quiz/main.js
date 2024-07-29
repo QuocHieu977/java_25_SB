@@ -85,11 +85,10 @@ btnFinish.addEventListener("click", () => {
         choicesEl.classList.add("hide");
         btnFinish.classList.add("hide");
 
-        const resultEl = document.createElement("div");
-        resultEl.innerText = `Đúng ${result.length}/${questions.length} câu`;
-        document.body.appendChild(resultEl);
+        alert(`Đúng ${result.length}/${questions.length} câu`);
+        window.location.reload();
     } else {
         alert("Mời bạn chọn đáp án...");
     }
+    
 });
-
