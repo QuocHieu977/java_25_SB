@@ -61,17 +61,18 @@ const renderQuestion = () => {
 renderQuestion(questions);
 
 const selectAnswers = (choice) => {
-    if(choice) {
-        if(choice === String(questions[currentQuestionIndex].answers)) 
-            result.push(choice);
-    }else {
-        alert("Mời bạn chọn đáp án...")
-    }
+    if(choice === String(questions[currentQuestionIndex].answers)) 
+        result.push(choice);
 }
 
 btnNext.addEventListener("click", () => {
     const selectEl = document.querySelector('input[name="choice"]:checked');
-    selectAnswers(selectEl.value);
+    if(selectEl) {
+        selectAnswers(selectEl.value);
+    } else {
+        alert("Mời bạn chọn đáp án...")
+    }
+    
     currentQuestionIndex++;
     renderQuestion(questions);
     
