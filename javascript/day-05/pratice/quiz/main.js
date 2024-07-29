@@ -24,6 +24,7 @@ const questions = [
         answers: true
     },
 ];   
+
 let result = [];
 let currentQuestionIndex = 0;
 const btnNext = document.querySelector("#btn-next");
@@ -69,25 +70,26 @@ btnNext.addEventListener("click", () => {
     const selectEl = document.querySelector('input[name="choice"]:checked');
     if(selectEl) {
         selectAnswers(selectEl.value);
+        currentQuestionIndex++;
+        renderQuestion(questions);
     } else {
-        alert("Mời bạn chọn đáp án...")
+        alert("Mời bạn chọn đáp án...");
     }
-    
-    currentQuestionIndex++;
-    renderQuestion(questions);
-    
 });
 
 btnFinish.addEventListener("click", () => {
     const selectEl = document.querySelector('input[name="choice"]:checked');
-    selectAnswers(selectEl.value);
+    if(selectEl) {
+        selectAnswers(selectEl.value);
+        questionEl.classList.add("hide");
+        choicesEl.classList.add("hide");
+        btnFinish.classList.add("hide");
 
-    questionEl.classList.add("hide");
-    choicesEl.classList.add("hide");
-    btnFinish.classList.add("hide");
-
-    const resultEl = document.createElement("div");
-    resultEl.innerText = `Đúng ${result.length}/${questions.length} câu`;
-    document.body.appendChild(resultEl);
+        const resultEl = document.createElement("div");
+        resultEl.innerText = `Đúng ${result.length}/${questions.length} câu`;
+        document.body.appendChild(resultEl);
+    } else {
+        alert("Mời bạn chọn đáp án...");
+    }
 });
 
