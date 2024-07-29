@@ -89,7 +89,6 @@ inputEl.addEventListener('keydown', e => {
         const keywords = e.target.value;
         const result = users.filter(e => 
             e.name.toLowerCase().includes(keywords.toLowerCase()));
-    
         renderUsers(result);
         console.log(e);
     }
