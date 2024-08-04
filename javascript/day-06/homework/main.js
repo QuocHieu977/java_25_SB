@@ -30,6 +30,7 @@ const renderImageBreed = (image) => {
 const renderBreed = (breeds) => {
     // Duyệt qua object breeds -> tạo thẻ option -> gắn vào DOM
     const keys = Object.keys(breeds);
+    console.log(keys);
     let html ="";
     keys.forEach(key => {
         html += `
