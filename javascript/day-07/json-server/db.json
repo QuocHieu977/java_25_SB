@@ -21,9 +21,9 @@
   ],
   "todos": [
     {
-      "id": 1,
-      "title": "Đi chơi",
-      "status": false
+      "title": "Đánh bóng",
+      "status": false,
+      "id": 1
     },
     {
       "id": 2,
@@ -36,8 +36,8 @@
       "id": 3
     },
     {
-      "title": "đi cafe",
-      "status": true,
+      "title": "đi xem đá bóng",
+      "status": false,
       "id": 4
     }
   ]

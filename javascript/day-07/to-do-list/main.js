@@ -45,6 +45,7 @@ const renderTodo = (todos) => {
 //Thêm công việc mới (nếu title rỗng -> alert “Tên công việc không được để trống”)
 const inputTodo = document.querySelector('#input-todo');
 const btnAdd = document.querySelector('#btn-add');
+const btnSearch = document.querySelector('#btn-search');
 
 btnAdd.addEventListener("click", async () => {
     // lấy ra dữ liệu trong ô input
@@ -148,6 +149,16 @@ getAllTodos();
 
 // Tìm kiếm
 inputTodo.addEventListener("change", async() => {
+    const title = inputTodo.value.trim();
+    try {
+        let res = await axios.get(`${API_URL}?q=${title}`);
+        renderTodo(res.data);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+btnSearch.addEventListener("click", async() => {
     const title = inputTodo.value.trim();
     try {
         let res = await axios.get(`${API_URL}?q=${title}`);
