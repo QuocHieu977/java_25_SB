@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -25,7 +26,6 @@ public class BookServiceImpl implements BookService {
         return bookDAO.findById(id);
     }
 
-
     @Override
     public List<Book> findByTitle(String keyword) {
         return bookDAO.findByTitleContainsIgnoreCase(keyword);
@@ -39,12 +39,9 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findBookBeetweenYear(int startYear, int endYear) {
         List<Book> books = bookDAO.findAll();
-        List<Book> newBook = new ArrayList<>();
-        for(Book book: books) {
-            if(book.getYear() >= startYear && book.getYear() <= endYear) {
-                newBook.add(book);
-            }
-        }
-        return newBook;
+
+        return books.stream()
+                .filter(book -> book.getYear() >= startYear && book.getYear() <= endYear)
+                .collect(Collectors.toList());
     }
 }
