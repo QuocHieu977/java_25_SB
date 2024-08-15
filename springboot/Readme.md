@@ -1,3 +1,9 @@
+### Kiến trúc Spring boot
+- Mô hình mvc trong spring boot
+![three layer](images/threelayer.png)
+- Luồng đi trong spring boot
+![springboot](images/alt2.png)
+
 ### Tight-coupling
 - Trong lập trình java, khái niệm tight-coupling(liên kết ràng buộc) ám chỉ mối quan quan hệ các lớp(classes) quá chặt chẽ
 - Khi sử dụng sử dụng tight-coupling, các lớp liên kế nốt với nhau 1 cách chặt chẽ, và sự thay đổi của 1 lớp có thể ảnh hưởng đến toàn bộ hệ thống hoặc các lớp khác
@@ -62,7 +68,7 @@
 - @PostConstruct: là 1 annotation đánh dấu trên 1 method bên trong một Bean, IoC hoặc ApplicationContext sẽ gọi method này sau khi Bean đó được tạo và quản lý
 - @PreDestroy: là 1 annotation đánh dấu trên 1 method bên trong một Bean, IoC hoặc ApplicationContext sẽ gọi method này sau khi Bean đó bị xoá hoặc không được quản lý nữa
 
-![Lifecycle-Bean](https://viblo.asia/p/spring-boot-3-spring-bean-life-cycle-atpostconstruct-va-atpredestroy-Qbq5Q4nmlD8)
+![alt](./images/alt1.png)
 
 ```java
 import jakarta.annotation.PostConstruct;

@@ -1,6 +1,7 @@
 package com.example.demo_thymeleaf.controller;
 
 import com.example.demo_thymeleaf.model.Book;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,3 +36,4 @@ public class BookController {
         return "admin/blog";
     }
 }
+
