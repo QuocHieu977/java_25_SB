@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 public class InitDB implements CommandLineRunner {
     // khi ứng dụng đc chạy thì sẽ khởi tạo database
     // có 3 trường hợp đọc file -> trong trường hợp này cần đọc từ file json -> nên cần @Qualifier("jsonFileReader")≤≥
-    @Qualifier("EXCELFileReader")
+    @Qualifier("jsonFileReader")
     @Autowired
     private IFileReader iFileReader;
 
@@ -19,7 +19,7 @@ public class InitDB implements CommandLineRunner {
         System.out.println("Đọc dữ liệu từ file...");
 
         // lấy ra các cuốn sách gán vào DB
-        BookDB.books = iFileReader.readFile("book.xlsx");
+        BookDB.books = iFileReader.readFile("book.json");
         System.out.println(BookDB.books.size());
     }
 }

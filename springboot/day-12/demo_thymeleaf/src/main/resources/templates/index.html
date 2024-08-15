@@ -1,0 +1,21 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thymeleaf</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>Home page</h1>
+    <p>fhjdahfdajfhdsafjdsafsda</p>
+
+    <p th:text="${book.title}"></p>
+    <p th:text="${book.author}"></p>
+    <p th:text="${book.year}"></p>
+
+    <script th:src=@{js/main.js}></script>
+</body>
+
+</html>
