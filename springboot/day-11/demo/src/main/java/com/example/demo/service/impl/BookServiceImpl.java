@@ -39,7 +39,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findBookBeetweenYear(int startYear, int endYear) {
         List<Book> books = bookDAO.findAll();
-
         return books.stream()
                 .filter(book -> book.getYear() >= startYear && book.getYear() <= endYear)
                 .collect(Collectors.toList());

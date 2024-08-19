@@ -1,5 +1,5 @@
-<!doctype html>
-
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,13 +9,46 @@
 </head>
 <body>
     <h1>Home page</h1>
-    <p>fhjdahfdajfhdsafjdsafsda</p>
+<!--    <p>this is home page</p>-->
 
-    <p th:text="${book.title}"></p>
-    <p th:text="${book.author}"></p>
-    <p th:text="${book.year}"></p>
+<!--    <p th:text="${book.getTitle()}"></p>-->
+<!--    <p th:text="${book.author}"></p>-->
+<!--    <p th:text="${book.year}"></p>-->
 
-    <script th:src=@{js/main.js}></script>
+    <h3>Danh sách books</h3>
+
+    <form action="">
+        <input type="text" name="title" placeholder="Tìm kiếm theo tên">
+        <button type="submit">Tìm Kiếm</button>
+    </form>
+
+    <br>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="book: ${books}" th:styleappend="${book.getId()%2 == 1 ? 'background-color: #72cda7' : ''}">
+            <td th:text="${book.getId()}"></td>
+            <td th:text="${book.getTitle()}"></td>
+            <td th:text="${book.getAuthor()}"></td>
+            <td th:text="${book.getYear()}"></td>
+            <td>
+<!--                <a th:href="@{/book/{id} (id = ${book.getId()})}">Xem chi tiết</a>-->
+                <a th:href="@{|/book/${book.getId()}|}">Xem chi tiết</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <script th:src="@{/js/main.js}"></script>
 </body>
-
 </html>

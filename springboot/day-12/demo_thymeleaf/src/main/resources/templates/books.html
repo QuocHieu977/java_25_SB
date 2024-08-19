@@ -1,0 +1,57 @@
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Shop</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Home page</h1>
+<h3>Danh sách books</h3>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Year</th>
+        <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="book: ${pageResponse.getContent()}" th:styleappend="${book.getId()%2 == 1 ? 'background-color: #72cda7' : ''}">
+        <td th:text="${book.getId()}"></td>
+        <td th:text="${book.getTitle()}"></td>
+        <td th:text="${book.getAuthor()}"></td>
+        <td th:text="${book.getYear()}"></td>
+        <td>
+            <!--<a th:href="@{/book/{id} (id = ${book.getId()})}">Xem chi tiết</a>-->
+            <a th:href="@{|/book/${book.getId()}|}">Xem chi tiết</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<button th:if="${pageResponse.getCurrentPage() != 1}">
+    <a th:href="|/books?page=${pageResponse.getCurrentPage()-1}|">Trang trước</a>
+</button>
+
+<button th:style="${pageResponse.getCurrentPage() == number ? 'background-color: #72cda7' : ''}"
+        th:each="number : ${#numbers.sequence(1, pageResponse.totalPages())}">
+    <a th:href="|/books?page=${number}|" th:text="${number}">1</a>
+</button>
+
+<button th:if="${pageResponse.getCurrentPage() != pageResponse.totalPages()}">
+    <a th:href="|/books?page=${pageResponse.getCurrentPage()+1}|">Trang sau</a>
+</button>
+
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

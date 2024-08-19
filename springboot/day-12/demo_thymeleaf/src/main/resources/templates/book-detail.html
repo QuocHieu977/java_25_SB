@@ -1,0 +1,37 @@
+<!doctype html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${book ==null ? 'Not found' : book.getTitle()}">Document</title>
+</head>
+
+<body>
+<h2 th:if="${book == null}">Book Not Found</h2>
+
+<!-- thẻ th:block là thẻ ảo -> không hiển thị trên giao hiện-->
+<th:block th:if="${book != null}">
+    <h2>Thông tin sách: </h2>
+    <p th:text="${book.getTitle()}"></p>
+    <p th:text="${book.author}"></p>
+    <p th:text="${book.year}"></p>
+</th:block>
+
+<h4>Các cuốn sách liên quan: </h4>
+
+<th:block th:if="${relateBooks.isEmpty()}">
+    <p>Không có cuốn sách liên quan nào!</p>
+</th:block>
+
+<th:block th:if="${!relateBooks.isEmpty()}">
+    <ul>
+        <li th:each="relateBook: ${relateBooks}">
+            <a th:href="@{/book/{id}(id=${relateBook.getId()})}" th:text="${relateBook.getTitle()}"></a>
+            - <span th:text="${relateBook.getAuthor()}"></span>
+        </li>
+    </ul>
+</th:block>
+</body>
+</html>

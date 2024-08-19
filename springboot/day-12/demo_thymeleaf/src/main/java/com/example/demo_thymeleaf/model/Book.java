@@ -2,6 +2,8 @@ package com.example.demo_thymeleaf.model;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -15,4 +17,5 @@ public class Book {
     private String title;
     private String author;
     private int year;
+    private LocalDate createDate;
 }
