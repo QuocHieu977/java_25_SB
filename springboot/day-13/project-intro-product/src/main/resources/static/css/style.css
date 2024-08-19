@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+
+}
+.container {
+    margin: 50px auto 0 auto;
+    max-width: 1280px;
+    width: 100%;
+}
+
+.title-product {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 50px;
+}
+/* List styles */
+.list-product {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    list-style-type: none;
+    margin: 0;
+}
+
+/* Item styles */
+.item-product {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: calc(25% - 20px); /* 4 items per row with gap */
+    box-sizing: border-box;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none; /* Remove underline from links */
+}
+
+.item-product:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Product link styles */
+.product-link {
+    display: block;
+    color: inherit; /* Ensure text color is inherited */
+    text-decoration: none; /* Remove underline from links */
+}
+
+/* Image styles */
+.product-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Product info styles */
+.product-info {
+    padding: 15px;
+}
+
+.product-info h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.product-info p {
+    margin: 5px 0;
+    max-height: 100px;
+    color: #555;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.price-discount {
+    font-size: 16px;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.rating {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.product-info p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.price-discount {
+    font-size: 16px;
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.rating {
+    font-size: 14px;
+    color: #f39c12;
+}
+
+.pagination {
+    margin: 20px auto;
+}

@@ -89,6 +89,11 @@ public class BookController {
                                 @RequestParam(required = false, defaultValue = "1") int page,
                                 @RequestParam(required = false, defaultValue = "10") int size) {
 
+        // PageResponseImpl<Book> pageResponse1 = new PageResponseImpl<>();
+//        pageResponse1.setCurrentPage(page);
+//        pageResponse1.setPageSize(size);
+//        pageResponse1.setData(books);
+
         PageResponse<Book> pageResponse = PageResponseImpl.<Book>builder()
                 .currentPage(page)
                 .pageSize(size)
