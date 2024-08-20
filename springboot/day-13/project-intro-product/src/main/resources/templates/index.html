@@ -20,7 +20,7 @@
     <ul class="list-product" >
         <li class="item-product" th:each="product : ${products}">
                 <a th:href="@{|/products/${product.getId()}|}" class="product-link">
-                    <img th:src="@{/image/img_2.jpg}" alt="this is image" class="product-image">
+                    <img th:src="@{/images/img_2.jpg}" alt="this is image" class="product-image">
                     <div class="product-info">
                         <h4 th:text="${product.getName()}">name</h4>
                         <th:block th:if="${product.getPriceDiscount() > 0}">
