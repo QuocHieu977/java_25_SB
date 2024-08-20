@@ -17,4 +17,14 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getAllProducts() {
         return productDAO.getProducts();
     }
+
+    @Override
+    public List<Product> searchByTitleProduct(String title) {
+        return productDAO.filterProducts(title);
+    }
+
+    @Override
+    public List<Product> sortByPriceByProduct(String sort) {
+        return productDAO.sortProducts(sort);
+    }
 }

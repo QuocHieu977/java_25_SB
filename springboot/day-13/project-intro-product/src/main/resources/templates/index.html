@@ -29,7 +29,7 @@
     </div>
 
     <ul class="list-product" >
-        <li class="item-product" th:each="product : ${products}">
+        <li class="item-product" th:each="product : ${pageResponse.getContent()}">
                 <a th:href="@{|/products/${product.getId()}|}" class="product-link">
                     <img th:src="@{/images/img_1.jpg}" alt="this is image" class="product-image">
                     <div class="product-info">
@@ -59,7 +59,7 @@
             </button>
 
             <button th:style="${pageResponse.getCurrentPage() == number ? 'background-color: #72cda7' : ''}"
-                    th:each="number : ${#numbers.sequence(1, pageResponse.totalPages())}">
+                    th:each="number : ${#numbers.sequence(1, pageResponse.totalPages()+1)}">
                 <a th:href="|?sort=desc&page=${number}|" th:text="${number}">1</a>
             </button>
 

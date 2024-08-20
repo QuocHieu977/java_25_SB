@@ -8,4 +8,8 @@ import java.util.List;
 
 public interface ProductDAO {
     List<Product> getProducts();
+
+    List<Product> filterProducts(String title);
+
+    List<Product> sortProducts(String sort);
 }

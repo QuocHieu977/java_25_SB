@@ -28,26 +28,23 @@ public class ProductController {
                               @RequestParam(required = false, defaultValue = "1") int page,
                               @RequestParam(required = false, defaultValue = "8") int size) {
 
-        PageResponse<Product> pageResponse = PageResponseImpl.<Product>builder()
-                .currentPage(page)
-                .pageSize(size)
-                .data(productService.getAllProducts())
-                .build();
+
 
         List<Product> newProducts = new ArrayList<Product>();
 
         if (title != null && !title.isEmpty()) {
-            newProducts = productService.getAllProducts().stream()
-                    .filter(p -> p.getName().toLowerCase().contains(title.toLowerCase()))
-                    .toList();
+            newProducts = productService.searchByTitleProduct(title);
         } else {
-            newProducts = pageResponse.getContent();
+            newProducts = productService.getAllProducts();
         }
 
-
+        PageResponse<Product> pageResponse = PageResponseImpl.<Product>builder()
+                .currentPage(page)
+                .pageSize(size)
+                .data(newProducts)
+                .build();
 
         model.addAttribute("pageResponse", pageResponse);
-        model.addAttribute("products", newProducts);
 
         return "index";
     }
@@ -69,25 +66,22 @@ public class ProductController {
             @RequestParam(required = false, defaultValue = "1") int page,
             @RequestParam(required = false, defaultValue = "8") int size
     ){
-        PageResponse<Product> pageResponse = PageResponseImpl.<Product>builder()
-                .currentPage(page)
-                .pageSize(size)
-                .data(productService.getAllProducts())
-                .build();
+
 
         List<Product> newProducts = new ArrayList<Product>();
         if (sort.equalsIgnoreCase("desc")) {
-            newProducts = pageResponse.getContent().stream()
-                    .sorted((o1, o2) -> o1.getPrice() - o2.getPrice())
-                    .toList();
+            newProducts = productService.sortByPriceByProduct(sort);
         } else if (sort.equalsIgnoreCase("asc")) {
-            newProducts = pageResponse.getContent().stream()
-                    .sorted((o1, o2) -> o2.getPrice() - o1.getPrice())
-                    .toList();
+            newProducts = productService.sortByPriceByProduct(sort);
         }
 
+        PageResponse<Product> pageResponse = PageResponseImpl.<Product>builder()
+                .currentPage(page)
+                .pageSize(size)
+                .data(newProducts)
+                .build();
+
         model.addAttribute("pageResponse", pageResponse);
-        model.addAttribute("products", newProducts);
 
         return "index";
     }
