@@ -44,22 +44,11 @@ public class ProductController {
             newProducts = pageResponse.getContent();
         }
 
-        if (sort.equalsIgnoreCase("desc")) {
-            newProducts = pageResponse.getContent().stream()
-                    .sorted((o1, o2) -> o1.getPrice() - o2.getPrice())
-                    .toList();
-        }
 
-        if (sort.equalsIgnoreCase("asc")) {
-            newProducts = pageResponse.getContent().stream()
-                    .sorted((o1, o2) -> o2.getPrice() - o1.getPrice())
-                    .toList();
-        }
 
         model.addAttribute("pageResponse", pageResponse);
         model.addAttribute("products", newProducts);
 
-        System.out.println(productService.getAllProducts().size());
         return "index";
     }
 
@@ -73,10 +62,33 @@ public class ProductController {
         return "product-detail";
     }
 
-    @GetMapping("/products/sortByPriceDesc")
-    public String getSortByPriceDesc() {
+    @GetMapping("/sort")
+    public String sortByPrice(
+            Model model,
+            @RequestParam(required = false, defaultValue = "desc") String sort,
+            @RequestParam(required = false, defaultValue = "1") int page,
+            @RequestParam(required = false, defaultValue = "8") int size
+    ){
+        PageResponse<Product> pageResponse = PageResponseImpl.<Product>builder()
+                .currentPage(page)
+                .pageSize(size)
+                .data(productService.getAllProducts())
+                .build();
+
+        List<Product> newProducts = new ArrayList<Product>();
+        if (sort.equalsIgnoreCase("desc")) {
+            newProducts = pageResponse.getContent().stream()
+                    .sorted((o1, o2) -> o1.getPrice() - o2.getPrice())
+                    .toList();
+        } else if (sort.equalsIgnoreCase("asc")) {
+            newProducts = pageResponse.getContent().stream()
+                    .sorted((o1, o2) -> o2.getPrice() - o1.getPrice())
+                    .toList();
+        }
+
+        model.addAttribute("pageResponse", pageResponse);
+        model.addAttribute("products", newProducts);
 
         return "index";
     }
-
 }

@@ -20,10 +20,10 @@
 
         <div class="wrap-sort">
             <button>
-                <a th:href="|?sort=desc&page=${pageResponse.getCurrentPage()}|">Giá tăng dần</a>
+                <a th:href="|/sort?&sort=desc&page=${pageResponse.getCurrentPage()}|">Giá tăng dần</a>
             </button>
             <button>
-                <a th:href="|?sort=asc&page=${pageResponse.getCurrentPage()}|">Giá giảm dần</a>
+                <a th:href="|/sort?sort=asc&page=${pageResponse.getCurrentPage()}|">Giá giảm dần</a>
             </button>
         </div>
     </div>
