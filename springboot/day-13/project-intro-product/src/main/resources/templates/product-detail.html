@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text="${product == null ? 'Product Not Found' : product.getName()}">Product Detail</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <div class="product-detail-container">
     <div class="product-image">
-        <img th:src="${product.getThumbnail()}" alt="Product Image">
+        <img th:src="@{/image/img_1.jpg}" alt="Product Image">
     </div>
     <div class="product-details">
         <h1 th:text="${product.getName()}">Product Name</h1>
         <p class="description" th:text="${product.getDescription()}">Product Description</p>
-        <p class="price" th:text="${product.getPrice()}">$ Price</p>
-        <p class="price-discount" th:text="${product.getPriceDiscount()}">$ Discount Price</p>
-        <p class="rating" th:text="${product.getRating()}">Rating</p>
+        <th:block th:if="${product.getPriceDiscount() > 0}">
+            <p class="price-discount"  th:text="${product.getPriceDiscount()} + '$'">priceDiscount</p>
+        </th:block>
+
+        <th:block th:if="${product.getPriceDiscount() == 0}">
+            <p class="price-new" th:text="${product.getPrice()} + '$'">price</p>
+        </th:block>
+
+        <th:block th:unless="${product.getPriceDiscount() == 0}">
+            <p class="price" th:text="${product.getPrice()} + '$'">price</p>
+        </th:block>
+        <p class="rating" th:text="${product.getRating()} + '★'">Rating</p>
         <button class="add-to-cart">Add to Cart</button>
     </div>
 </div>

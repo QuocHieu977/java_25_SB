@@ -5,11 +5,53 @@ body {
     background-color: #f4f4f4;
 
 }
+.form-input {
+    margin: 20px 0;
+    display: flex;
+    padding-left: 20px;
+    height: 30px;
+    width: 500px;
+}
+
+.form-input input {
+    height: 100%;
+    width: 80%;
+    outline: none;
+    margin-right: 20px;
+}
+
+.form-input button {
+    width: 20%;
+    height: 36px;
+    cursor: pointer;
+}
+
 .container {
     margin: 50px auto 0 auto;
     max-width: 1280px;
     width: 100%;
 }
+
+.product-detail-container{
+    display: flex;
+    margin: 50px auto 0 auto;
+    max-width: 800px;
+    width: 100%;
+}
+
+.product-detail-container .product-image{
+    width: 250px !important;
+    height: 300px;
+    margin-right: 50px;
+}
+
+.product-detail-container .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
 
 .title-product {
     display: flex;
@@ -55,7 +97,6 @@ body {
 .product-image {
     width: 100%;
     height: auto;
-    border-bottom: 1px solid #ddd;
 }
 
 /* Product info styles */
@@ -71,49 +112,42 @@ body {
 
 .product-info p {
     margin: 5px 0;
-    max-height: 100px;
+    max-height: 300px;
     color: #555;
 }
 
 .price {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 14px;
     color: #333;
+    text-decoration: line-through;
 }
 
 .price-discount {
     font-size: 16px;
-    color: #e74c3c;
+    color: red !important;
     font-weight: bold;
 }
 
 .rating {
     font-size: 14px;
-    color: #f39c12;
-}
-
-.product-info p {
-    margin: 5px 0;
-    color: #555;
-}
-
-.price {
-    font-size: 16px;
-    font-weight: bold;
-    color: #333;
-}
-
-.price-discount {
-    font-size: 16px;
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-.rating {
-    font-size: 14px;
-    color: #f39c12;
+    color: #f39c12 !important;
 }
 
 .pagination {
-    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.pagination button {
+    padding: 8px 10px;
+    outline: none;
+}
+
+.pagination button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+

@@ -35,8 +35,8 @@ public class ProductController {
 
         List<Product> newProducts = new ArrayList<Product>();
 
-        if (title != null) {
-            newProducts = pageResponse.getContent().stream()
+        if (title != null && !title.isEmpty()) {
+            newProducts = productService.getAllProducts().stream()
                     .filter(p -> p.getName().toLowerCase().contains(title.toLowerCase()))
                     .toList();
         } else {
