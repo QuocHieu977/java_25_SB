@@ -12,15 +12,26 @@
 <div class="container">
     <div class="title-product">Danh sách sản phẩm</div>
 
-    <form action="" class="form-input">
-        <input type="text" name="title" placeholder="Tìm kiếm theo tên">
-        <button type="submit">Tìm Kiếm</button>
-    </form>
+    <div class="header-container">
+        <form action="" class="form-input">
+            <input type="text" name="title" placeholder="Tìm kiếm theo tên">
+            <button type="submit">Tìm Kiếm</button>
+        </form>
+
+        <div class="wrap-sort">
+            <button>
+                <a th:href="|?sort=desc&page=${pageResponse.getCurrentPage()}|">Giá tăng dần</a>
+            </button>
+            <button>
+                <a th:href="|?sort=asc&page=${pageResponse.getCurrentPage()}|">Giá giảm dần</a>
+            </button>
+        </div>
+    </div>
 
     <ul class="list-product" >
         <li class="item-product" th:each="product : ${products}">
                 <a th:href="@{|/products/${product.getId()}|}" class="product-link">
-                    <img th:src="@{/images/img_2.jpg}" alt="this is image" class="product-image">
+                    <img th:src="@{/images/img_1.jpg}" alt="this is image" class="product-image">
                     <div class="product-info">
                         <h4 th:text="${product.getName()}">name</h4>
                         <th:block th:if="${product.getPriceDiscount() > 0}">
@@ -44,16 +55,16 @@
     <div class="pagination">
         <div>
             <button th:if="${pageResponse.getCurrentPage() != 1}">
-                <a th:href="|?page=${pageResponse.getCurrentPage()-1}|">Trang trước</a>
+                <a th:href="|?sort=desc&page=${pageResponse.getCurrentPage()-1}|">Trang trước</a>
             </button>
 
             <button th:style="${pageResponse.getCurrentPage() == number ? 'background-color: #72cda7' : ''}"
                     th:each="number : ${#numbers.sequence(1, pageResponse.totalPages())}">
-                <a th:href="|?page=${number}|" th:text="${number}">1</a>
+                <a th:href="|?sort=desc&page=${number}|" th:text="${number}">1</a>
             </button>
 
             <button th:if="${pageResponse.getCurrentPage() != pageResponse.totalPages()}">
-                <a th:href="|?page=${pageResponse.getCurrentPage()+1}|">Trang sau</a>
+                <a th:href="|?sort=desc&page=${pageResponse.getCurrentPage()+1}|">Trang sau</a>
             </button>
         </div>
 

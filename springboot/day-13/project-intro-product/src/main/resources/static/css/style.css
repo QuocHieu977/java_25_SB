@@ -5,6 +5,28 @@ body {
     background-color: #f4f4f4;
 
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-container .wrap-sort {
+    margin-top: 5px;
+    margin-right: 40px;
+}
+
+.wrap-sort button {
+    padding: 8px;
+    cursor: pointer;
+}
+
 .form-input {
     margin: 20px 0;
     display: flex;

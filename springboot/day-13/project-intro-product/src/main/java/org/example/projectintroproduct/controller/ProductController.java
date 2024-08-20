@@ -24,6 +24,7 @@ public class ProductController {
     @GetMapping
     public String getProducts(Model model,
                               @RequestParam(required = false) String title,
+                              @RequestParam(required = false, defaultValue = "desc") String sort,
                               @RequestParam(required = false, defaultValue = "1") int page,
                               @RequestParam(required = false, defaultValue = "8") int size) {
 
@@ -43,6 +44,18 @@ public class ProductController {
             newProducts = pageResponse.getContent();
         }
 
+        if (sort.equalsIgnoreCase("desc")) {
+            newProducts = pageResponse.getContent().stream()
+                    .sorted((o1, o2) -> o1.getPrice() - o2.getPrice())
+                    .toList();
+        }
+
+        if (sort.equalsIgnoreCase("asc")) {
+            newProducts = pageResponse.getContent().stream()
+                    .sorted((o1, o2) -> o2.getPrice() - o1.getPrice())
+                    .toList();
+        }
+
         model.addAttribute("pageResponse", pageResponse);
         model.addAttribute("products", newProducts);
 
@@ -59,4 +72,11 @@ public class ProductController {
         model.addAttribute("product", product);
         return "product-detail";
     }
+
+    @GetMapping("/products/sortByPriceDesc")
+    public String getSortByPriceDesc() {
+
+        return "index";
+    }
+
 }

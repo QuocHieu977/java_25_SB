@@ -6,3 +6,6 @@
 
 ### Chi tiết sản phẩm
 ![alt](./src/main/resources/static/images/alt3.png)
+
+### Sắp xếp giá tăng dần và giảm dần
+![alt](./src/main/resources/static/images/alt5.png)
