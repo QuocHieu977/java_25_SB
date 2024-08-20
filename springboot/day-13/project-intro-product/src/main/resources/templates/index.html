@@ -63,7 +63,7 @@
                 <a th:href="|?sort=desc&page=${number}|" th:text="${number}">1</a>
             </button>
 
-            <button th:if="${pageResponse.getCurrentPage() != pageResponse.totalPages()}">
+            <button th:if="${pageResponse.getCurrentPage() != pageResponse.totalPages()+1}">
                 <a th:href="|?sort=desc&page=${pageResponse.getCurrentPage()+1}|">Trang sau</a>
             </button>
         </div>
