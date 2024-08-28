@@ -1,0 +1,22 @@
+- Movies
+- Episode
+- Review
+- User
+- Genre
+- Actor
+- Director
+- Country
+- Blog
+- History
+- Favorite
+
+Moive 1-M Episode
+Moive M-M Genre
+Movie M-M Actor
+Movie M-M Director
+Moive 1-M History
+Country 1-M Movie
+User 1-M Blog
+User 1-M Review
+User 1-M Favorite
+Favorite M-M Movie
