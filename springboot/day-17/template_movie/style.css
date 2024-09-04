@@ -35,3 +35,45 @@ img {
 .fs-12 {
   font-size: 12px;
 }
+
+/* blog */
+.form-input {
+  width: 550px;
+  height: 40px;
+}
+
+.form-input input {
+  height: 100%;
+  width: 80%;
+  padding-left: 8px;
+  outline: none;
+}
+
+.form-input button {
+  width: 20%;
+  height: 100%;
+  border-left: none;
+}
+
+.blog-item {
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.blog-poster img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+/* blog-detail */
+.blog-detail-header .tag span {
+  background-color: #e5e5e5;
+  border: 1px solid #c4c4c4;
+  border-radius: 2px;
+  color: gray;
+  font-size: 14px;
+  padding: 0 4px 0 4px;
+  cursor: pointer;
+  margin-right: 0.4rem;
+}
