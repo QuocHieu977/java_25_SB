@@ -1,5 +1,6 @@
 package org.example.movieweb.model.repository;
 
+import org.example.movieweb.entity.Blog;
 import org.example.movieweb.entity.Movie;
 import org.example.movieweb.model.enums.MovieType;
 import org.springframework.data.domain.Page;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     List<Movie> findByName(String name);
@@ -37,5 +39,11 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     Page<Movie> findByTypeAndStatus(MovieType type, Boolean status, Pageable pageable);
 
     List<Movie> findTop4ByStatusOrderByRatingDesc(Boolean status);
+
+    //optional là trạng thái có hoặc không
+    Optional<Movie> findByIdAndSlugAndStatus(Integer id, String slug, Boolean status);
+
+    // phim đề xuất
+    List<Movie> findByTypeAndStatus(MovieType type, Boolean status);
 
 }

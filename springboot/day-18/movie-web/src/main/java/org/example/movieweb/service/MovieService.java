@@ -23,6 +23,19 @@ public class MovieService {
         return movieRepository.findByTypeAndStatus(movieType, status, pageable);
     }
 
+    public Movie getMovieDetails(Integer id, String slug) {
+        return movieRepository.findByIdAndSlugAndStatus(id, slug, true)
+                .orElse(null);
+    }
+
+    public List<Movie> getMovieRecommendations(Integer id, MovieType type) {
+        return movieRepository.findByTypeAndStatus(type, true).stream()
+                .filter(movie -> !movie.getId().equals(id))
+                .sorted((o1, o2) -> (int) (o2.getRating() - o1.getRating()))
+                .limit(6)
+                .toList();
+    }
+
     public List<Movie> getMovieSortByRating(Boolean status) {
         return movieRepository.findTop4ByStatusOrderByRatingDesc(status);
     }
