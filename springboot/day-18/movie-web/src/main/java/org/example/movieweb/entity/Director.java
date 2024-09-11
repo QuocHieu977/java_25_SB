@@ -20,6 +20,7 @@ public class Director {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
+    @Column(unique = true, nullable = false)
     String name;
 
     @Column(unique = true, nullable = false)

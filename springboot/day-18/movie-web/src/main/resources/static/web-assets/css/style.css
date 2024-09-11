@@ -101,3 +101,12 @@ img {
 .play-detail-movie {
     font-size: 500px;
 }
+
+/* review*/
+.avatar-review {
+
+}
+.avatar-review img{
+    width: 120px;
+    border-radius: 50%;
+}

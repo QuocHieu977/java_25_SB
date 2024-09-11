@@ -7,6 +7,7 @@ import org.example.movieweb.model.enums.UserRole;
 
 import java.time.LocalDateTime;
 
+@ToString
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +20,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+
     String name;
 
     @Column(unique = true, nullable = false)
@@ -27,8 +29,8 @@ public class User {
     String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "USER")
     UserRole role;
+
     LocalDateTime createdAt;
-    LocalDateTime updateAt;
+    LocalDateTime updatedAt;
 }

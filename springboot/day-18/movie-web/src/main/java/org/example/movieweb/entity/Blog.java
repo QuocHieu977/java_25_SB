@@ -20,20 +20,23 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(nullable = false)
     String title;
-
-    @Column(unique = true, nullable = false)
     String slug;
 
     @Column(columnDefinition = "TEXT")
     String description;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "MEDIUMTEXT")
     String content;
+
     String thumbnail;
     Boolean status;
+
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
     LocalDateTime publishedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
 }

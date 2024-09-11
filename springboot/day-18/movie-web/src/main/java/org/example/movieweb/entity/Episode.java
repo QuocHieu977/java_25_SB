@@ -19,17 +19,16 @@ public class Episode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    @Column(nullable = false)
     String name;
-
-    @Column(nullable = false)
     Integer duration;
     Integer displayOrder;
-
-    @Column(nullable = false)
     String videoUrl;
     boolean status;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
     LocalDateTime publishedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    Movie movie;
 }

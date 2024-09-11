@@ -1,7 +1,6 @@
 package org.example.movieweb.entity;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -23,8 +22,15 @@ public class Review {
     @Column(columnDefinition = "TEXT")
     String content;
 
-    @Column(nullable = false)
     Integer rating;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    User user;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    Movie movie;
 }

@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import org.example.movieweb.model.enums.MovieType;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @ToString
 @Getter
@@ -40,4 +41,32 @@ public class Movie {
     LocalDateTime createdAt;
     LocalDateTime updateAt;
     LocalDateTime publishedAt;
+
+    @ManyToOne
+    @JoinColumn(name="country_id")
+    Country country;
+
+    @ManyToMany
+    @JoinTable(
+            name="moive_genre",
+            joinColumns = @JoinColumn(name="moive_id"),
+            inverseJoinColumns = @JoinColumn(name="genre_id")
+    )
+    List<Genre> genres;
+
+    @ManyToMany
+    @JoinTable(
+            name = "movie_actor",
+            joinColumns = @JoinColumn(name="moive_id"),
+            inverseJoinColumns = @JoinColumn(name="actor_id")
+    )
+    List<Actor> actors;
+
+    @ManyToMany
+    @JoinTable(
+            name = "movie_director",
+            joinColumns = @JoinColumn(name="moive_id"),
+            inverseJoinColumns = @JoinColumn(name="director_id")
+    )
+    List<Director> directors;
 }

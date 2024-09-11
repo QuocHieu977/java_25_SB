@@ -108,11 +108,26 @@
                                 <p>Nội dung phim</p>
                             </div>
                             <div class="col">
-                                <p>Hành động, Hài hước, Phưu lưu, Hoạt hình</p>
+                                <p>
+                                    <th:block th:each="genre, iterStart : ${movie.genres}">
+                                        <span th:text="${genre.name}"></span>
+                                        <span th:if="${!iterStart.last}">, </span>
+                                    </th:block>
+                                </p>
                                 <p>1999</p>
-                                <p>Nhật Bản</p>
-                                <p>EIICHIRO ODA</p>
-                                <p>N/A</p>
+                                <p th:text="${movie.country.name}">Nhật Bản</p>
+                                <p>
+                                    <th:block th:each="director, iterStart : ${movie.directors}">
+                                        <span th:text="${director.name}"></span>
+                                        <span th:if="${!iterStart.last}">, </span>
+                                    </th:block>
+                                </p>
+                                <p>
+                                    <th:block th:each="actor, iterStart : ${movie.actors}">
+                                        <span th:text="${actor.name}"></span>
+                                        <span th:if="${!iterStart.last}">, </span>
+                                    </th:block>
+                                </p>
                                 <p>
                                     Monkey D. Luffy, 1 cậu bé rất đam mê Đảo hải tặc có ước mơ
                                     tìm được kho báu One Piece và trở thành Vua hải tặc -
@@ -130,11 +145,26 @@
                             class="btn bg-danger movie-detail-content ps-4 pe-4">
                         <a href="#" class="text-white"
                         ><i class="fa-solid fa-play" style="color: #ffffff"></i> Xem
-                            thêm</a
+                            Phim</a
+                        >
+                    </button>
+
+                    <button
+                            type="button"
+                            class="btn bg-success movie-detail-content ps-4 pe-4">
+                        <a href="#" class="text-white"
+                        ><i class="fa-solid fa-heart" style="color: #ffffff"></i> Thêm vào yêu thích</a
                         >
                     </button>
                 </div>
             </div>
+        </div>
+
+        <div class="mt-4" th:if="${movie.type.name() == 'PHIM_BO'}">
+            <h4 class="mb-3" >Tập phim</h4>
+            <th:block th:each="episode : ${episodes}">
+                <a class="btn btn-dark me-2" th:text="${episode.name}">Tập 1</a>
+            </th:block>
         </div>
     </div>
 </section>
@@ -175,93 +205,30 @@
                 bình luận
             </p>
 
-            <div class="d-flex align-items-center mb-5">
-                <div
-                        class="me-4 ps-4 pe-4 pt-3 pb-3 bg-secondary-subtle rounded-circle fs-4">
-                    D
-                </div>
-
-                <div>
-                    <div class="d-flex align-items-center mb-1">
-                        <div class="fw-bold">Lê Hải Dũng</div>
-                        <span class="fs-12 mt-1 ms-2 text-secondary">27/02/2024</span>
+            <th:block th:each="review : ${reviews}">
+                <div class="d-flex align-items-center mb-5">
+                    <div class="avatar-review me-4">
+                        <img th:src="${review.getUser().getAvatar()}">
                     </div>
 
-                    <p class="mb-1 fw-bold">
-                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
-                        10/10
-                        <span>Xuất sắc</span>
-                    </p>
+                    <div>
+                        <div class="d-flex align-items-center mb-1">
+                            <div class="fw-bold" th:text="${review.getUser().name}">Lê Hải Dũng</div>
+                            <span class="fs-12 mt-1 ms-2 text-secondary">27/02/2024</span>
+                        </div>
 
-                    <p class="mb-0 text-secondary">Phim hay đáng để xem</p>
-                </div>
-            </div>
+                        <p class="mb-1 fw-bold">
+                            <i class="fa-solid fa-star" style="color: #ffd43b"></i>
+                            <span th:text="${review.getRating()}"></span>
+                            <span>Xuất sắc</span>
+                        </p>
 
-            <div class="d-flex align-items-center mb-5">
-                <div
-                        class="me-4 ps-4 pe-4 pt-3 pb-3 bg-secondary-subtle rounded-circle fs-4">
-                    D
-                </div>
-
-                <div>
-                    <div class="d-flex align-items-center mb-1">
-                        <div class="fw-bold">Lê Hải Dũng</div>
-                        <span class="fs-12 mt-1 ms-2 text-secondary">27/02/2024</span>
+                        <p class="mb-0 text-secondary" th:text="${review.getContent()}">Phim hay đáng để xem</p>
                     </div>
-
-                    <p class="mb-1 fw-bold">
-                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
-                        10/10
-                        <span>Xuất sắc</span>
-                    </p>
-
-                    <p class="mb-0 text-secondary">Phim hay đáng để xem</p>
                 </div>
-            </div>
+            </th:block>
 
-            <div class="d-flex align-items-center mb-5">
-                <div
-                        class="me-4 ps-4 pe-4 pt-3 pb-3 bg-secondary-subtle rounded-circle fs-4">
-                    D
-                </div>
 
-                <div>
-                    <div class="d-flex align-items-center mb-1">
-                        <div class="fw-bold">Lê Hải Dũng</div>
-                        <span class="fs-12 mt-1 ms-2 text-secondary">27/02/2024</span>
-                    </div>
-
-                    <p class="mb-1 fw-bold">
-                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
-                        10/10
-                        <span>Xuất sắc</span>
-                    </p>
-
-                    <p class="mb-0 text-secondary">Phim hay đáng để xem</p>
-                </div>
-            </div>
-
-            <div class="d-flex align-items-center mb-5">
-                <div
-                        class="me-4 ps-4 pe-4 pt-3 pb-3 bg-secondary-subtle rounded-circle fs-4">
-                    D
-                </div>
-
-                <div>
-                    <div class="d-flex align-items-center mb-1">
-                        <div class="fw-bold">Lê Hải Dũng</div>
-                        <span class="fs-12 mt-1 ms-2 text-secondary">27/02/2024</span>
-                    </div>
-
-                    <p class="mb-1 fw-bold">
-                        <i class="fa-solid fa-star" style="color: #ffd43b"></i>
-                        10/10
-                        <span>Xuất sắc</span>
-                    </p>
-
-                    <p class="mb-0 text-secondary">Phim hay đáng để xem</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>

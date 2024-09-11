@@ -2,10 +2,14 @@ package org.example.movieweb.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.example.movieweb.entity.Blog;
+import org.example.movieweb.entity.Episode;
 import org.example.movieweb.entity.Movie;
+import org.example.movieweb.entity.Review;
 import org.example.movieweb.model.enums.MovieType;
 import org.example.movieweb.service.BlogService;
+import org.example.movieweb.service.EpisodeService;
 import org.example.movieweb.service.MovieService;
+import org.example.movieweb.service.ReviewService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +24,8 @@ import java.util.List;
 public class WebController {
     private final MovieService movieService;
     private final BlogService blogService;
+    private final EpisodeService episodeService;
+    private final ReviewService reviewService;
 
     @GetMapping
     public  String getHomePage(Model model) {
@@ -83,6 +89,12 @@ public class WebController {
 
         List<Movie> moviesRecommended = movieService.getMovieRecommendations(movie.getId(), movie.getType());
         model.addAttribute("movieRecommended", moviesRecommended);
+
+        List<Episode> episodes = episodeService.getEpisodesByMovieId(movie.getId());
+        model.addAttribute("episodes", episodes);
+
+        List<Review> reviews = reviewService.getReviewsByMovieId(movie.getId());
+        model.addAttribute("reviews", reviews);
 
         return "web/chi-tiet-phim";
     }
