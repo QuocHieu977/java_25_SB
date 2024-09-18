@@ -1,4 +1,4 @@
-package org.example.movieweb.model.repository;
+package org.example.movieweb.repository;
 
 import org.example.movieweb.entity.Blog;
 import org.example.movieweb.entity.Movie;

@@ -116,4 +116,5 @@ public class WebController {
         model.addAttribute("blog", blog);
         return "web/chi-tiet-tin-tuc";
     }
+
 }

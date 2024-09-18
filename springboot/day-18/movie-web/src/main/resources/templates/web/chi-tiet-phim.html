@@ -188,6 +188,8 @@
     <div class="container">
         <div class="mb-2 d-flex justify-content-between align-items-center">
             <h5>Bình luận</h5>
+
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-comment">Viết bình luận</button>
         </div>
 
         <div>
@@ -314,11 +316,12 @@
     </div>
 </footer>
 
+<!-- Modal trailer-->
 <div class="modal fade" id="modal-trailer" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Trailer</h1>
+                <h1 class="modal-title fs-5" id="modalTrailer">Trailer</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -327,6 +330,40 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                 </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal comment-->
+<div class="modal fade" id="modal-comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalComment">Đánh giá phim</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="text-center">
+                    <input type="hidden" id="movie-id" th:value="${movie.id}">
+                    <div th:text="${movie.name}" class="fs-3"></div>
+                    <div class="d-flex flex-row justify-content-center align-items-center">
+                        <p th:each="i : ${#numbers.sequence(1, 10)}"
+                           class="pt-3 pb-3 me-2 mb-0 fs-3 rating-review"><i class="fa-solid fa-star"></i>
+                        </p>
+                    </div>
+
+                    <p class="pb-3 fs-4 title-review">Bạn đã đánh giá 0/10</p>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"></textarea>
+                        <label for="floatingTextarea2" >Hãy chia sẻ cảm nhận về bộ phim</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer d-flex justify-content-center align-items-center">
+                <button type="button" class="btn btn-primary btn-lg" id="btn-submit">Hoàn tất</button>
             </div>
         </div>
     </div>

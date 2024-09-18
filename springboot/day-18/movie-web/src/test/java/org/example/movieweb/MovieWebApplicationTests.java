@@ -6,6 +6,7 @@ import org.example.movieweb.entity.*;
 import org.example.movieweb.model.enums.MovieType;
 import org.example.movieweb.model.enums.UserRole;
 import org.example.movieweb.model.repository.*;
+import org.example.movieweb.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package org.example.movieweb.model.repository;
+package org.example.movieweb.repository;
 
 import org.example.movieweb.entity.User;
 import org.example.movieweb.model.enums.UserRole;

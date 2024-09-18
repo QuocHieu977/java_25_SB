@@ -101,3 +101,8 @@ img {
 .play-detail-movie {
     font-size: 500px;
 }
+
+/*review */
+.review {
+    cursor: pointer;
+}
