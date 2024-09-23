@@ -23,7 +23,7 @@ public class ReviewService {
     private final UserRepository userRepository;
 
     public List<Review> getReviewsByMovieId(Integer id) {
-        return reviewRepository.findByMovieIdOrderByCreatedAtAsc(id);
+        return reviewRepository.findByMovieIdOrderByCreatedAtDesc(id);
     }
 
     public Review createReview(CreateReviewRequest request) {
