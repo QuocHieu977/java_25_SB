@@ -102,14 +102,7 @@ const modalReviewObj = new bootstrap.Modal('#modal-comment', {
     keyboard: false
 })
 const modalReviewEL = document.getElementById('modal-comment');
-
 let selectRating = -1;
-let selectComment = -1;
-let selectRatingValue = -1;
-let messageEl = document.createElement('p');
-let messageEl2 = document.createElement('p');
-
-
 
 ratingEls.forEach((e, index) => {
     e.addEventListener("mouseenter", (e) => {
@@ -145,24 +138,12 @@ const  highlightStart = (index) => {
 
 const validateReview = () => {
     if (selectRating < 0) {
-        messageEl.innerText = "Mời bạn đánh giá phim.";
-        messageEl.style.color = 'red';
-
-        if (selectRatingValue < 0) {
-            modalBodyComment.appendChild(messageEl);
-            selectRatingValue++;
-        }
-        return;
+        toastr.error("Vui lòng hãy nhập đánh giá");
     }
 
     if (textEl.value === "") {
-        messageEl2.innerText = "Mời bạn chia sẻ cảm nhận về bộ phim."
-        messageEl2.style.color = 'red';
+        toastr.error("Vui lòng nhập nội dung bình luận");
 
-        if (selectComment < 0) {
-            modalBodyComment.appendChild(messageEl2);
-            selectComment++;
-        }
     }
 }
 
@@ -173,8 +154,6 @@ const resetReview = () => {
     nameEl.innerText = `Bạn đã đánh giá 0/10`;
     selectRating = -1;
     textEl.value = "";
-    messageEl.remove();
-    messageEl2.remove();
 }
 
 let idUpdate = null;
@@ -192,11 +171,10 @@ const openModalUpdateReview = (reviewId) => {
     nameEl.value = `Bạn đã đánh giá ${selectRating}/10`;
     modalReviewObj.show();
     idUpdate = reviewId;
-    console.log(reviewId)
 };
 
 // btn-submit
-document.getElementById('btn-submit').addEventListener('click', async () => {
+document.getElementById('btn-submit').addEventListener('click',  () => {
     if (idUpdate) {
         updateReview();
     } else {
@@ -206,7 +184,6 @@ document.getElementById('btn-submit').addEventListener('click', async () => {
 
 // create review
 const createReview = async () => {
-    checkReview = true;
     validateReview();
     // create request
     const request = {
@@ -214,45 +191,44 @@ const createReview = async () => {
         content: textEl.value,
         movieId: movie.id
     }
-    try {
-        let res = await axios.post("/api/reviews", request);
-        // insert review to reviews and the frist
-        reviews.unshift(res.data);
-        render(reviews);
-        // reset data
-        resetReview();
-        // close modal
-        modalReviewObj.hide();
-        toastr.success("Tạo bình luận thành công");
-    } catch (error) {
-        console.log(error);
-        toastr.error(error.response.data.message);
+    if (request.rating > 0 && request.content.length > 0) {
+        try {
+            let res = await axios.post("/api/reviews", request);
+            // insert review to reviews and the frist
+            reviews.unshift(res.data);
+            render(reviews);
+            // reset data
+            resetReview();
+            // close modal
+            modalReviewObj.hide();
+            toastr.success("Tạo bình luận thành công");
+        } catch (error) {
+            console.log(error);
+            toastr.error(error.response.data.message);
+        }
     }
-
 }
 
 // update review
 const updateReview = async () => {
-    if (textEl.value.trim() === "") {
-        toastr.warning("Vui lòng nhập nội dung bình luận");
-        return;
-    }
-
+    validateReview();
     const request = {
         rating: selectRating,
         content: textEl.value,
     }
 
-    try {
-        let res = await axios.put(`/api/reviews/${idUpdate}`, request);
-        const index = reviews.findIndex(review => review.id === idUpdate);
-        reviews[index] = res.data;
-        render(reviews);
-        modalReviewObj.hide();
-        toastr.success("Cập nhật bình luận thành công");
-    } catch (e) {
-        console.log(e)
-        toastr.error(e.response.data.message);
+    if (request.rating > 0 && request.content.length > 0) {
+        try {
+            let res = await axios.put(`/api/reviews/${idUpdate}`, request);
+            const index = reviews.findIndex(review => review.id === idUpdate);
+            reviews[index] = res.data;
+            render(reviews);
+            modalReviewObj.hide();
+            toastr.success("Cập nhật bình luận thành công");
+        } catch (e) {
+            console.log(e)
+            toastr.error(e.response.data.message);
+        }
     }
 };
 
