@@ -51,7 +51,15 @@ const renderReviews = (reviews) => {
                             <p class="mb-0 text-secondary">${review.content}</p>
                         </div>
                         
-                         
+                         <div style="${idCurrentUser !== review.user.id ? 'display: none' : ''}">
+                            <button class="modify-review text-primary border-0 bg-transparent me-1"             
+                                     onclick="openModalUpdateReview(${review.id})" 
+                                    >sửa
+                            </button>
+                            <button class="delete-review text-danger border-0 bg-transparent me-1"
+                                    onclick="deleteReview(${review.id})">xoá
+                            </button>
+                        </div>
                     </div>
             </div>`;
     });

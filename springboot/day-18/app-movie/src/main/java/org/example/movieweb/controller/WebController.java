@@ -153,4 +153,13 @@ public class WebController {
         // nếu đã đăng nhập mà bấm vào nút đăng nhập thì sẽ k điều hướng về trang đăng nhập mà ở lại trang chủ ("redirect:/")
     }
 
+    @GetMapping("/thong-tin-ca-nhan")
+    public String informationUserPage(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("currentUser");
+        if (user == null) {
+            return "web/dang-nhap";
+        }
+        return "web/thong-tin-ca-nhan";
+    }
+
 }
