@@ -2,6 +2,7 @@ package org.example.movieweb.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.example.movieweb.model.request.LoginRequest;
+import org.example.movieweb.model.request.RegisterRequest;
 import org.example.movieweb.model.response.ErrorResponse;
 import org.example.movieweb.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,20 @@ public class AuthApi {
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
             authService.login(request);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            ErrorResponse errorResponse = ErrorResponse.builder()
+                    .status(HttpStatus.BAD_REQUEST)
+                    .message(e.getMessage())
+                    .build();
+            return ResponseEntity.badRequest().body(errorResponse);
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        try {
+            authService.register(request);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             ErrorResponse errorResponse = ErrorResponse.builder()

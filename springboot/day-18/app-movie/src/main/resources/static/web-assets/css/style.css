@@ -108,7 +108,7 @@ img {
 }
 
 /*login*/
-#form-login {
+#form-login, #form-register {
     width: 480px;
 }
 

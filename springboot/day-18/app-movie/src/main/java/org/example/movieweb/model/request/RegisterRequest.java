@@ -1,0 +1,17 @@
+package org.example.movieweb.model.request;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class RegisterRequest {
+    String name;
+    String mail;
+    String password;
+    String confirmPassword;
+}

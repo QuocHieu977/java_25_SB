@@ -9,6 +9,9 @@ import org.example.movieweb.service.BlogService;
 import org.example.movieweb.service.EpisodeService;
 import org.example.movieweb.service.MovieService;
 import org.example.movieweb.service.ReviewService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +24,12 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class WebController {
+    private static final Logger log = LoggerFactory.getLogger(WebController.class);
     private final MovieService movieService;
     private final BlogService blogService;
     private final EpisodeService episodeService;
     private final ReviewService reviewService;
+    private final ConversionService conversionService;
 
     @GetMapping
     public  String getHomePage(Model model) {
@@ -160,6 +165,17 @@ public class WebController {
             return "web/dang-nhap";
         }
         return "web/thong-tin-ca-nhan";
+    }
+
+    @GetMapping("/logout")
+    public String logoutPage(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/dang-nhap";
+    }
+
+    @GetMapping("/dang-ky")
+    public String singUpPage() {
+        return "web/dang-ky";
     }
 
 }
