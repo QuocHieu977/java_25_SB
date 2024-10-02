@@ -309,9 +309,10 @@ let currentUser = [[${session.currentUser}]];
 
         try {
             let res = await axios.put("/api/users/update-profile", request);
-            toastr.success("Cập nhật bình luận thành công");
+            toastr.success("Bạn đã cập nhật thành công");
         } catch (e) {
             console.log(e)
+            toastr.error(e.response.data.message);
         }
     })
 
@@ -320,6 +321,11 @@ let currentUser = [[${session.currentUser}]];
     const newPasswordEl = document.getElementById("newPassword");
     const confirmPasswordEl = document.getElementById("confirmPassword");
     const btnUpdatePasswordEl = document.getElementById("btn-update-password");
+
+
+    const modalPasswordObj = new bootstrap.Modal('#modalPassword', {
+        keyboard: false
+    })
 
     btnUpdatePasswordEl.addEventListener("click", async () => {
         if (oldPasswordEl.value === "") {
@@ -355,7 +361,8 @@ let currentUser = [[${session.currentUser}]];
 
         try {
             let res = await axios.put("/api/users/update-password", data);
-            toastr.success("Cập nhật mật khẩu thành công");
+            toastr.success("Bạn đã cập nhật mật khẩu thành công");
+            modalPasswordObj.hide();
         } catch (e) {
             console.log(e)
             toastr.error(e.response.data.message);
