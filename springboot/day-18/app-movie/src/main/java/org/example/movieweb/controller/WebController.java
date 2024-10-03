@@ -159,7 +159,7 @@ public class WebController {
     }
 
     @GetMapping("/thong-tin-ca-nhan")
-    public String informationUserPage(HttpServletRequest request) {
+    public String profileUserPage(HttpServletRequest request) {
         User user = (User) request.getSession().getAttribute("currentUser");
         if (user == null) {
             return "web/dang-nhap";
@@ -174,7 +174,7 @@ public class WebController {
     }
 
     @GetMapping("/dang-ky")
-    public String singUpPage() {
+    public String registerPage() {
         return "web/dang-ky";
     }
 
