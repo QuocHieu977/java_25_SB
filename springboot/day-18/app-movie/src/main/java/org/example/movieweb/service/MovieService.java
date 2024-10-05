@@ -39,4 +39,13 @@ public class MovieService {
     public List<Movie> getMovieSortByRating(Boolean status) {
         return movieRepository.findTop4ByStatusOrderByRatingDesc(status);
     }
+
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll(Sort.by("createdAt").descending());
+    }
+
+    public Movie getMovieById(Integer id) {
+        return movieRepository.findById(id)
+                .orElse(null);
+    }
 }

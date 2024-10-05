@@ -32,6 +32,10 @@ public class AuthService {
         session.setAttribute("currentUser", user);
     }
 
+    public void logout() {
+        session.getAttribute("currentUser");
+    }
+
     public void register(RegisterRequest request) {
         if (request.getName().isEmpty()) {
             throw new RuntimeException("name is empty");

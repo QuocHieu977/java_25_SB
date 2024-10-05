@@ -167,6 +167,7 @@ public class WebController {
         return "web/thong-tin-ca-nhan";
     }
 
+
     @GetMapping("/logout")
     public String logoutPage(HttpServletRequest request) {
         request.getSession().invalidate();
