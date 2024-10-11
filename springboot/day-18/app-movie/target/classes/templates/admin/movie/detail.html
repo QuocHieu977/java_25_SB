@@ -164,14 +164,17 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <form id="uploadForm" enctype="multipart/form-data">
-                                                    <input type="file" id="file-upload" name="files" accept="image/*" required>
-                                                    <button type="submit">Upload</button>
-                                                </form>
+                                                <img th:src="${movie.poster}" th:alt="${movie.name}">
                                             </div>
                                         </div>
                                     </div>
                                 </form>
+                                <div class="form-group text-right">
+                                    <form id="uploadForm" enctype="multipart/form-data">
+                                        <input type="file" id="file-upload" name="files" accept="image/*" required>
+                                        <button type="submit">Tải ảnh lên</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -340,28 +343,39 @@
                 toastr.error("Bạn đã cập nhật phim thất bại");
             }
 
-            //  upload img
-            const upLoadFormEl = document.getElementById('uploadForm');
-            const fileUploadEL = document.getElementById('file-upload');
+        });
 
-            upLoadFormEl.addEventListener('submit', async (e) => {
-                e.preventDefault();
+        //  upload img
+        const upLoadFormEl = document.getElementById('uploadForm');
+        const fileUploadEL = document.getElementById('file-upload');
+        let files;
 
-                const formData = new FormData();
-                formData.append('files', fileUploadEL.file[0]);
+        fileUploadEL.addEventListener('change', (e) => {
+            files  = e.target.files;
 
-                try {
-                    let res = await axios.post(`/api/admin/movie/${movie.id}/upload-poster` , formData, {
-                        headers: {
-                            'Content-Type': 'multipart/form-data',
-                        }
-                    });
-                    console.log(res.data)
-                    toastr.success("Bạn đã cập nhật ảnh thành công");
-                } catch (e) {
-                    toastr.error("Bạn đã cập nhật ảnh thất bại");
-                }
-            });
+            console.log("files", files[0])
+        })
+
+        upLoadFormEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!files || files.length === 0) {
+                toastr.error("Bạn cần chọn một file trước khi upload");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', files[0]);
+            console.log(formData);
+
+            try {
+                let res = await axios.post(`/api/admin/movie/${movie.id}/upload-poster` , formData);
+                console.log(res.data)
+                toastr.success("Bạn đã cập nhật ảnh thành công");
+            } catch (e) {
+                toastr.error("Bạn đã cập nhật ảnh thất bại");
+                console.error(e.response ? e.response.data : e.message);
+            }
         });
 
     </script>

@@ -1,7 +1,6 @@
 package org.example.movieweb.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.example.movieweb.entity.*;
 import org.example.movieweb.model.enums.MovieType;
