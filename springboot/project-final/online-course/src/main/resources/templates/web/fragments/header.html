@@ -1,0 +1,206 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<header class="header header-3">
+    <div class="header-nav-wrapper header-sticky">
+        <nav class="navbar navbar-expand-xl border-bottom">
+            <div class="container-fluid px-lg-5 px-3 mt-4 mb-3">
+
+                <div class="d-flex gap-4">
+                    <a class="navbar-brand" href="/"><img src="/web-assets/images/logo.png" alt="Logo"/></a>
+
+                    <div class="d-flex align-items-center category">
+                        Thể loại
+                        <ul class="list-category shadow">
+                            <li class="item">
+                                Java fullstack
+                                <i class="fa-solid fa-angle-right"></i>
+                                <ul class="sub-menu">
+                                    <li>li 1</li>
+                                    <li>li 2</li>
+                                    <li>li 3</li>
+                                    <li>li 4</li>
+                                </ul>
+                            </li>
+                            <li class="item">
+                                web
+                                <i class="fa-solid fa-angle-right"></i>
+                                <ul class="sub-menu">
+                                    <li>li 1</li>
+                                    <li>li 2</li>
+                                    <li>li 3</li>
+                                    <li>li 4</li>
+                                </ul>
+                            </li>
+                            <li class="item">
+                                Php
+                                <i class="fa-solid fa-angle-right"></i>
+                                <ul class="sub-menu">
+                                    <li>li 1</li>
+                                    <li>li 2</li>
+                                    <li>li 3</li>
+                                    <li>li 4</li>
+                                </ul>
+                            </li>
+
+                            <li class="item">
+                                Php
+                                <i class="fa-solid fa-angle-right"></i>
+                            </li>
+
+                            <li class="item">
+                                Php
+                                <i class="fa-solid fa-angle-right"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="form-outline d-flex" data-mdb-input-init>
+                            <input type="search" id="form1" class="form-control"
+                                   placeholder="Tìm kiếm nội dung bất kỳ"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                        class="header-actions d-none d-sm-flex position-relative order-xl-3 d-flex align-items-center justify-content-between">
+
+                    <div class="d-flex gap-4 align-items-center">
+                        <a href="">Giảng Dạy</a>
+                        <a href="#">Học Tập</a>
+                        <a href="#">Blog</a>
+
+                        <div class="cart-container position-relative">
+                            <!-- Cart Icon -->
+                            <div class="cart-icon position-relative">
+                                <a class="text-reset icon border rounded-2" href="#">
+                                    <i class="feather-icon icon-shopping-cart"></i>
+                                </a>
+                                <div class="quantity-cart">4</div>
+                            </div>
+
+                            <!-- Course List Dropdown -->
+                            <div class="cart-dropdown">
+                                <div class="cart-wrapper">
+                                    <a href="#" class="d-flex">
+                                        <div class="course-cart p-2 rounded-2">
+                                            <img src="/web-assets/images/course1.jpg" alt="Course"
+                                                 style="width: 120px; object-fit: cover;"/>
+                                        </div>
+
+                                        <div class="cart-body ms-2 p-2">
+                                            <h6 class="sub-title">
+                                                The Complete Python Pro Bootcamp for 2023
+                                            </h6>
+                                            <div class="author">
+                                                <span>Samuel</span>
+                                            </div>
+                                            <div class="cart-price">
+                                                <div class="price">1.999.000 ₫
+                                                    <del>2.999.000 ₫</del>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <div class="cart-footer">
+                                    <div class="total-price">Tổng: 1.999.000 ₫
+                                        <del>2.999.000 ₫</del>
+                                    </div>
+                                    <button class="btn btn-primary"><a href="#">Chuyển đến giỏ
+                                        hàng</a></button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a class="text-reset icon border rounded-2 admin-user" data-bs-toggle="collapse"
+                           href="#collapseAdminMenu"
+                           role="button" aria-expanded="false" aria-controls="collapseAdminMenu">
+                            <i class="feather-icon icon-user"></i>
+                        </a>
+                        <div class="admin-menu pt-3 bg-white collapse" id="collapseAdminMenu">
+                            <div class="d-flex avatar border-bottom pb-3">
+                                <img class="img-fluid border rounded-circle" src="/web-assets/images/ava-sm1.jpg"
+                                     width="50" alt="avatar"/>
+                                <div class="grettings ps-3">
+                                    <h6 class="mb-0">Jack Carey</h6>
+                                    <small>Founder</small>
+                                </div>
+                            </div>
+                            <nav class="dashboard-nav mt-1">
+                                <ul class="list-unstyled nav">
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-home"></i><span>Dashboard</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i class="feather-icon icon-user"></i><span>My
+                          Profile</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-book-open"></i><span>Enrolled Courses</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-gift"></i><span>Wishlist</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-star"></i><span>Reviews</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-box"></i><span>My Quiz Attempts</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-shopping-bag"></i><span>Order History</span></a>
+                                    </li>
+                                    <li class="border-bottom"></li>
+                                    <li>
+                                        <a class="nav-link active" href="#"><i
+                                                class="feather-icon icon-book"></i><span>My Courses</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-briefcase"></i><span>Assignments</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-cpu"></i><span>Quiz Attempts</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-bell"></i><span>Announcements</span></a>
+                                    </li>
+                                    <li class="border-bottom"></li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-settings"></i><span>Settings</span></a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link" href="#"><i
+                                                class="feather-icon icon-log-out"></i><span>Logout</span></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <a href="#" class="btn d-none d-sm-block btn-primary shadow border-0 rounded-2">Đăng ký</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+</body>
+</html>l>

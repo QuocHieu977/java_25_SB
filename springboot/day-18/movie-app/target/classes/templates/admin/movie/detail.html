@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/layout/layout :: main-layout(~{:: title}, ~{:: #css}, ~{:: .content-wrapper}, ~{:: #js})}">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Chi tiết phim</title>
+
+    <th:block id="css">
+        <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css" />
+
+        <link rel="stylesheet" href="/admin-assets/plugins/select2/css/select2.min.css" />
+        <link rel="stylesheet" href="/admin-assets/dist/css/style.css">
+    </th:block>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="#">Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/admin/movie">Phim</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Tạo phim
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row py-2">
+                    <div class="col-6">
+                        <a href="/admin/movie" class="btn btn-default">
+                            <i class="fas fa-chevron-left"></i> Quay lại
+                        </a>
+                        <button type="button" class="btn btn-info px-4" id="btn-update">
+                            Cập nhật
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="form-update-movie">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label>Tên phim</label>
+                                                <input type="text" class="form-control" id="name" th:value="${movie.name}" name="name"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Trailer Url</label>
+                                                <input type="text" class="form-control" id="trailerUrl" th:value="${movie.trailerUrl}" name="trailerUrl"/>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Mô tả ngắn</label>
+                                                <textarea name="description" id="description" class="form-control" rows="3" th:text="${movie.description}"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Thể loại</label>
+                                                <div class="select2-purple">
+                                                    <select class="select2 form-control" multiple="multiple" id="genre" name="genre">
+                                                        <option th:each="genre : ${genres}"
+                                                                th:value="${genre.id}"
+                                                                th:text="${genre.name}"
+                                                                th:selected="${movie.genres.contains(genre)}">Chiến tranh</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Đạo diễn</label>
+                                                <div class="select2-purple">
+                                                    <select class="select2 form-control" multiple="multiple" id="director" name="director">
+                                                        <option th:each="director : ${directors}"
+                                                                th:value="${director.id}"
+                                                                th:text="${director.name}"
+                                                                th:selected="${movie.directors.contains(director)}">đạo diễn 1</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Diễn viên</label>
+                                                <div class="select2-purple">
+                                                    <select class="select2 form-control" multiple="multiple" id="actor" name="actor">
+                                                        <option th:each="actor : ${actors}"
+                                                                th:value="${actor.id}"
+                                                                th:text="${actor.name}"
+                                                                th:selected="${movie.actors.contains(actor)}">đạo diễn 1</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Trạng thái</label>
+                                                <select id="status" class="form-control" name="status">
+                                                    <option value="false" th:selected="${movie.status} == false">
+                                                        Chưa công khai
+                                                    </option>
+                                                    <option value="true" th:selected="${movie.status} == true">
+                                                        Công khai
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Loại phim</label>
+                                                <select id="type" class="form-control" name="type">
+                                                    <option value="PHIM_LE"
+                                                            th:selected="${movie.type.toString() == 'PHIM_LE'}">
+                                                        Phim lẻ
+                                                    </option>
+                                                    <option value="PHIM_BO"
+                                                            th:selected="${movie.type.toString() == 'PHIM_BO'}">
+                                                        Phim bộ
+                                                    </option>
+                                                    <option value="PHIM_CHIEU_RAP"
+                                                            th:selected="${movie.type.toString() == 'PHIM_CHIEU_RAP'}">
+                                                        Phim chiếu rạp
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Năm phát hành</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="releaseYear"
+                                                       th:value="${movie.releaseYear}"
+                                                       name="releaseYear"/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Quốc gia</label>
+                                                <select id="country" class="form-control" name="country">
+                                                    <option th:each="country : ${countries}"
+                                                            th:value="${country.id}"
+                                                            th:selected="${country.id == movie.country.id}"
+                                                            th:text="${country.name}">Chiến tranh
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <img th:src="${movie.poster}" th:alt="${movie.name}" class="poster">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="form-group text-right">
+                                    <form id="uploadForm" enctype="multipart/form-data">
+                                        <input type="file" id="file-upload" name="files" accept="image/*">
+                                        <button type="submit">Tải ảnh lên</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-content-center mb-3">
+                            <h4>Danh sách tập phim</h4>
+                            <button class="btn btn-primary" onclick="openModalCreateEpisode()">Tạo tập phim
+                            </button>
+                        </div>
+                        <table class="table table-bordered table-hover" id="table-episode">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Tên tập phim</th>
+                                <th style="width: 50%">Link</th>
+                                <th>Thời lượng</th>
+                                <th>Trạng thái</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="episode, e : ${listEpisodes}">
+                                <td th:text="${e.index + 1}">1</td>
+                                <td th:text="${episode.name}">Tập full</td>
+                                <td    th:text="${episode.videoUrl}"
+                                        class="videoUrl" style="word-break: break-all">https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4</td>
+                                <td class="duration" th:text="${episode.duration}">90</td>
+                                <td th:text="${episode.status ? 'Công khai' : 'Chưa công khai'}">Công khai</td>
+                                <td>
+                                    <label class="btn btn-warning btn-sm mb-0" for="input-video-206">
+                                        <i class="fas fa-upload"></i>
+                                    </label>
+                                    <input type="file" id="input-video-206" class="d-none" onchange="uploadEpisodeVideo(206, event)">
+                                    <button class="btn btn-primary btn-sm btn-preview" th:onclick="|showEpisodePreview()|">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-sm" onclick="openModalUpdateEpisode(206)"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteEpisode(206)"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalPreview">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Video Preview</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+<!--                        <video width="100%" controls="">-->
+<!--                            <source src="" type="video/mp4">-->
+<!--                            Your browser does not support the video tag.-->
+<!--                        </video>-->
+                        <iframe id="video-trailer" style="aspect-ratio: 16 / 9" width="100%" th:src="${movie.trailerUrl}"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalEpisode">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Default Modal</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form-episode" novalidate="novalidate">
+                            <div class="form-group">
+                                <label>Tên tập phim</label>
+                                <input type="text" class="form-control" id="episodeName" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label>Tập số bao nhiêu</label>
+                                <input type="text" class="form-control" id="episodeDisplayOrder" name="displayOrder">
+                            </div>
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                <select class="form-control" id="episodeStatus" name="status">
+                                    <option value="false">Ẩn</option>
+                                    <option value="true">Công khai</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+</div>
+
+<!--Modal thumbnail-->
+<div class="modal fade" id="modal-xl" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Extra Large Modal</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>One fine body…</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                    Save changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block id="js">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+
+    <script src="/admin-assets/plugins/select2/js/select2.full.min.js"></script>
+
+    <script src="/admin-assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="/admin-assets/plugins/jquery-validation/additional-methods.min.js"></script>
+
+    <script th:inline="javascript">
+        $(".select2").select2();
+
+        const movie = [[${movie}]]
+
+        $('#form-update-movie').validate({
+            rules: {
+                name: {
+                    required: true,
+                },
+                trailerUrl: {
+                    required: true,
+                },
+                description: {
+                    required: true
+                },
+                genre: {
+                    required: true
+                },
+                director: {
+                    required: true
+                },
+                actor: {
+                    required: true
+                },
+                status: {
+                    required: true
+                },
+                type: {
+                    required: true
+                },
+                releaseYear: {
+                    required: true
+                },
+                country: {
+                    required: true
+                },
+            },
+            messages: {
+                name: {
+                    required: "Vui lòng nhập tên phim",
+                },
+                trailerUrl: {
+                    required: "Vui lòng nhập trailer url",
+                },
+                description: {
+                    required: "Vui lòng nhập mô tả"
+                },
+                genre: {
+                    required: "Vui lòng nhập thể loại"
+                },
+                director: {
+                    required: "Vui lòng nhập đạo diễn"
+                },
+                actor: {
+                    required: "Vui lòng nhập diễn viên"
+                },
+                status: {
+                    required: "Vui lòng nhập trạng thái"
+                },
+                type: {
+                    required: "Vui lòng nhập thể loại"
+                },
+                releaseYear: {
+                    required: "Vui lòng nhập năm phát hành"
+                },
+                country: {
+                    required: "Vui lòng nhập quốc gia"
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+        });
+
+        const nameEl = document.getElementById('name');
+        const trailerUrlEl = document.getElementById('trailerUrl');
+        const descriptionEl = document.getElementById('description');
+        const genreEl = $("#genre"); // truy cap theo cu phap jquery
+        const directorEl = $("#director");
+        const actorEl = $("#actor");
+        const statusEl = document.getElementById('status');
+        const typeEl = document.getElementById('type');
+        const releaseYearEl = document.getElementById('releaseYear');
+        const countryEl = document.getElementById('country')
+
+
+        const btnUpdateEl = document.getElementById('btn-update');
+        const imgEl = document.querySelector('.poster');
+        btnUpdateEl.addEventListener('click', async () => {
+            if (!$('#form-update-movie').valid()) {
+                return;
+            }
+
+            // tao request
+            const request = {
+                name: nameEl.value,
+                trailerUrl: trailerUrlEl.value,
+                description: descriptionEl.value,
+                genreIds: genreEl.val().map(id => Number(id)),
+                directorIds: directorEl.val().map(id => Number(id)),
+                actorIds: actorEl.val().map(id => Number(id)),
+                status: statusEl.value === "true",
+                type: typeEl.value,
+                releaseYear: Number(releaseYearEl.value),
+                countryId: Number(countryEl.value)
+            }
+
+            // goi api
+            try {
+                let res = await axios.put(`/api/admin/movie/${movie.id}`, request);
+                if (res.status === 200) {
+                    toastr.success("Bạn đã cập nhật phim thành công");
+                }
+                imgEl.url = res.data.url;
+            } catch (e) {
+                toastr.error("Bạn đã cập nhật phim thất bại");
+            }
+
+        });
+
+        //  upload img
+        const upLoadFormEl = document.getElementById('uploadForm');
+        const fileUploadEL = document.getElementById('file-upload');
+        let files;
+
+        fileUploadEL.addEventListener('change', (e) => {
+            files  = e.target.files;
+
+            console.log("files", files[0])
+        })
+
+        upLoadFormEl.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!files || files.length === 0) {
+                toastr.error("Bạn cần chọn một file trước khi upload");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', files[0]);
+            console.log(formData);
+
+            try {
+                let res = await axios.post(`/api/admin/movie/${movie.id}/upload-poster` , formData);
+                console.log(res.data)
+                toastr.success("Bạn đã cập nhật ảnh thành công");
+            } catch (e) {
+                toastr.error("Bạn đã cập nhật ảnh thất bại");
+                console.error(e.response ? e.response.data : e.message);
+            }
+        });
+
+        //modal-preview
+        const modalPreviewObj = new bootstrap.Modal(document.getElementById('modalPreview'), {
+            keyboard: false
+        });
+
+        const showEpisodePreview = () => {
+            modalPreviewObj.show();
+            console.log(movie.id)
+        }
+
+        const btnPreviewEls = document.querySelectorAll('.btn-preview');
+        btnPreviewEls.forEach(e => {
+            e.addEventListener('click', () => {
+                showEpisodePreview();
+            })
+        })
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Lấy phần tử modal
+            const modalTrailer = document.getElementById('modalPreview');
+
+            // Sử dụng sự kiện Bootstrap để phát hiện khi modal bị đóng
+            modalTrailer.addEventListener('hidden.bs.modal', function () {
+                // Lấy iframe
+                const iframe = document.getElementById('video-trailer');
+                // Lưu URL của video
+                const videoSrc = iframe.src;
+                // Tạm thời xóa src để dừng video
+                iframe.src = '';
+                // Đặt lại src khi modal đóng
+                iframe.src = videoSrc;
+            });
+        });
+    </script>
+</th:block>
+</body>
+
+</html>

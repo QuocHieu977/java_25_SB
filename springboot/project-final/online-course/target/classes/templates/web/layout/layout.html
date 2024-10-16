@@ -1,0 +1,55 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="main-layout(title, null, content, null)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!--  title rieng  -->
+    <title th:replace="${title}">Document</title>
+
+    <link rel="apple-touch-icon" th:href="@{/web-assets/images/favicon.png}"/>
+    <link rel="shortcut icon" th:href="@{/web-assets/images/favicon.ico}"/>
+    <link rel="stylesheet" th:href="@{/web-assets/css/feather.css}"/>
+    <link rel="stylesheet" th:href="@{/web-assets/css/nice-select2.css}"/>
+    <link rel="stylesheet" th:href="@{/web-assets/css/glightbox.min.css}"/>
+    <link rel="stylesheet" th:href="@{/web-assets/css/swiper-bundle.min.css}"/>
+    <link rel="stylesheet" th:href="@{/web-assets/css/header.css}">
+    <link rel="stylesheet" th:href="@{/web-assets/css/style.css}"/>
+
+    <!--  link private  -->
+    <link rel="stylesheet"/>
+
+</head>
+<body>
+
+<!-- loading -->
+<div id="preloader">
+    <div class="preloader">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<!-- Header -->
+<th:block th:replace="~{web/fragments/header :: .header}"></th:block>
+
+<!-- Content -->
+<th:block th:replace="${content}"></th:block>
+
+<!-- Footer -->
+<th:block th:replace="~{web/fragments/footer}"></th:block>
+
+<!-- scroll top -->
+<div class="back-top"><i class="feather-icon icon-chevron-up"></i></div>
+
+<script th:src="@{/web-assets/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/web-assets/js/swiper-bundle.min.js}"></script>
+<script th:src="@{/web-assets/js/nice-select2.js}"></script>
+<script th:src="@{/web-assets/js/glightbox.min.js}"></script>
+<script th:src="@{/web-assets/js/isotope.pkgd.min.js}"></script>
+<script th:src="@{/web-assets/js/purecounter_vanilla.js}"></script>
+<script th:src="@{/web-assets/js/plyr.min.js}"></script>
+<script th:src="@{/web-assets/js/custom.js}"></script>
+</body>
+</html>
