@@ -21,9 +21,6 @@ public class WebController {
         model.addAttribute("listCourseByRating", listCourseByRating);
         model.addAttribute("listCourseNew", listCourseNew);
 
-        System.out.println("listCourseByRating" + listCourseByRating.size());
-        System.out.println("listCourseNew" + listCourseNew.size());
-
         return "web/index";
     }
 }

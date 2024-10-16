@@ -163,25 +163,24 @@ class CourseOnlineProjetcFinfalApplicationTests {
         List<User> teachers = userRepository.findByRole(UserRole.TEACHER);
         List<Category> categories = categoryRepository.findAll();
 
-        // Random 1 -> 3 directors
-        List<User> rdTeachers = new ArrayList<>();
-        for (int j = 0; j < rd.nextInt(3) + 1; j++) {
-            User rdTeacher = teachers.get(rd.nextInt(teachers.size()));
-            if (!rdTeachers.contains(rdTeacher)) {
-                rdTeachers.add(rdTeacher);
-            }
-        }
-
         for(int i=0; i<100; i++) {
             String title = faker.book().title();
             Category rdCategory = categories.get(rd.nextInt(categories.size()));
             Boolean status = rd.nextInt(2) == 0;
 
+            List<User> rdTeachers = new ArrayList<>();
+            for (int j = 0; j < rd.nextInt(3) + 1; j++) {
+                User rdTeacher = teachers.get(rd.nextInt(teachers.size()));
+                if (!rdTeachers.contains(rdTeacher)) {
+                    rdTeachers.add(rdTeacher);
+                }
+            }
+
             Course course = Course.builder()
                     .title(title)
                     .slug(slugify.slugify(title))
                     .description(faker.lorem().paragraph())
-                    .thumbnail("https://placehold.co/400x200?text=" + title.substring(0, 1).toUpperCase())
+                    .thumbnail("https://placehold.co/400x300?text=" + title.substring(0, 1).toUpperCase())
                     .status(status)
                     .rating(faker.number().randomDouble(1, 1,5))
                     .price(faker.number().randomDouble(1,2000,5000))

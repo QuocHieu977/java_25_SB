@@ -216,7 +216,7 @@
                                         <i class="fas fa-upload"></i>
                                     </label>
                                     <input type="file" id="input-video-206" class="d-none" onchange="uploadEpisodeVideo(206, event)">
-                                    <button class="btn btn-primary btn-sm btn-preview" th:onclick="|showEpisodePreview()|">
+                                    <button class="btn btn-primary btn-sm btn-preview" th:onclick="|showEpisodePreview(${episode.id})|">
                                         <i class="fas fa-play"></i>
                                     </button>
                                     <button class="btn btn-success btn-sm" onclick="openModalUpdateEpisode(206)"><i class="fas fa-pencil-alt"></i></button>
@@ -240,15 +240,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-<!--                        <video width="100%" controls="">-->
-<!--                            <source src="" type="video/mp4">-->
-<!--                            Your browser does not support the video tag.-->
-<!--                        </video>-->
-                        <iframe id="video-trailer" style="aspect-ratio: 16 / 9" width="100%" th:src="${movie.trailerUrl}"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-                        </iframe>
+                        <video id="videoEpisode" width="100%" controls="">
+                            <source id="videoSource" src="" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             </div>
@@ -333,6 +328,7 @@
         $(".select2").select2();
 
         const movie = [[${movie}]]
+        const episodes = [[${listEpisodes}]]
 
         $('#form-update-movie').validate({
             rules: {
@@ -411,7 +407,6 @@
                 $(element).removeClass('is-invalid');
             }
         });
-
         const nameEl = document.getElementById('name');
         const trailerUrlEl = document.getElementById('trailerUrl');
         const descriptionEl = document.getElementById('description');
@@ -422,7 +417,6 @@
         const typeEl = document.getElementById('type');
         const releaseYearEl = document.getElementById('releaseYear');
         const countryEl = document.getElementById('country')
-
 
         const btnUpdateEl = document.getElementById('btn-update');
         const imgEl = document.querySelector('.poster');
@@ -495,35 +489,27 @@
         const modalPreviewObj = new bootstrap.Modal(document.getElementById('modalPreview'), {
             keyboard: false
         });
+        const videoEpisodeEl = document.getElementById('videoSource');
 
-        const showEpisodePreview = () => {
+        const showEpisodePreview = (episodeId) => {
             modalPreviewObj.show();
-            console.log(movie.id)
+            const episode = episodes.find(ep => ep.id === episodeId);
+            if (!episode) {
+                return;
+            }
+            videoEpisodeEl.setAttribute('src', episode.videoUrl);
+            const videoElement = document.getElementById('videoEpisode');
+            videoElement.load();
         }
 
         const btnPreviewEls = document.querySelectorAll('.btn-preview');
         btnPreviewEls.forEach(e => {
             e.addEventListener('click', () => {
-                showEpisodePreview();
+                const episodeId = e.getAttribute('episode-id');
+                showEpisodePreview(episodeId);
             })
         })
 
-        document.addEventListener('DOMContentLoaded', function () {
-            // Lấy phần tử modal
-            const modalTrailer = document.getElementById('modalPreview');
-
-            // Sử dụng sự kiện Bootstrap để phát hiện khi modal bị đóng
-            modalTrailer.addEventListener('hidden.bs.modal', function () {
-                // Lấy iframe
-                const iframe = document.getElementById('video-trailer');
-                // Lưu URL của video
-                const videoSrc = iframe.src;
-                // Tạm thời xóa src để dừng video
-                iframe.src = '';
-                // Đặt lại src khi modal đóng
-                iframe.src = videoSrc;
-            });
-        });
     </script>
 </th:block>
 </body>
