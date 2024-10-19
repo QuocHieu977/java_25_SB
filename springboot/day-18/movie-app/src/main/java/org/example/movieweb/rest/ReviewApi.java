@@ -18,44 +18,20 @@ public class ReviewApi {
 
     @PostMapping
     public ResponseEntity<?> createReview(@RequestBody CreateReviewRequest request) {
-       try {
-           Review review = reviewService.createReview(request);
-           return ResponseEntity.ok(review);
-       } catch (Exception e) {
-           ErrorResponse errorResponse = ErrorResponse.builder()
-                   .status(HttpStatus.BAD_REQUEST)
-                   .message(e.getMessage())
-                   .build();
-           return ResponseEntity.badRequest().body(errorResponse);
-       }
+        Review review = reviewService.createReview(request);
+        return ResponseEntity.ok(review);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateReview(@RequestBody UpdateReviewRequest request,
                                           @PathVariable Integer id) {
-        try {
-            Review review = reviewService.updateReview(id, request);
-            return ResponseEntity.ok(review);
-        } catch (Exception e) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
-                    .status(HttpStatus.BAD_REQUEST)
-                    .message(e.getMessage())
-                    .build();
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
+        Review review = reviewService.updateReview(id, request);
+        return ResponseEntity.ok(review);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteReview(@PathVariable Integer id) {
-        try {
-            reviewService.deleteReview(id);
-            return ResponseEntity.ok().build();
-        } catch (Exception e) {
-            ErrorResponse errorResponse = ErrorResponse.builder()
-                    .status(HttpStatus.BAD_REQUEST)
-                    .message(e.getMessage())
-                    .build();
-            return ResponseEntity.badRequest().body(errorResponse);
-        }
+        reviewService.deleteReview(id);
+        return ResponseEntity.ok().build();
     }
 }

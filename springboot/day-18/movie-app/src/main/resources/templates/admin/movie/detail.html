@@ -3,15 +3,15 @@
       th:replace="~{admin/layout/layout :: main-layout(~{:: title}, ~{:: #css}, ~{:: .content-wrapper}, ~{:: #js})}">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Chi tiết phim</title>
 
     <th:block id="css">
-        <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css"/>
 
-        <link rel="stylesheet" href="/admin-assets/plugins/select2/css/select2.min.css" />
+        <link rel="stylesheet" href="/admin-assets/plugins/select2/css/select2.min.css"/>
         <link rel="stylesheet" href="/admin-assets/dist/css/style.css">
     </th:block>
 </head>
@@ -64,27 +64,33 @@
                                         <div class="col-md-8">
                                             <div class="form-group">
                                                 <label>Tên phim</label>
-                                                <input type="text" class="form-control" id="name" th:value="${movie.name}" name="name"/>
+                                                <input type="text" class="form-control" id="name"
+                                                       th:value="${movie.name}" name="name"/>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Trailer Url</label>
-                                                <input type="text" class="form-control" id="trailerUrl" th:value="${movie.trailerUrl}" name="trailerUrl"/>
+                                                <input type="text" class="form-control" id="trailerUrl"
+                                                       th:value="${movie.trailerUrl}" name="trailerUrl"/>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Mô tả ngắn</label>
-                                                <textarea name="description" id="description" class="form-control" rows="3" th:text="${movie.description}"></textarea>
+                                                <textarea name="description" id="description" class="form-control"
+                                                          rows="3" th:text="${movie.description}"></textarea>
                                             </div>
 
                                             <div class="form-group">
                                                 <label>Thể loại</label>
                                                 <div class="select2-purple">
-                                                    <select class="select2 form-control" multiple="multiple" id="genre" name="genre">
+                                                    <select class="select2 form-control" multiple="multiple" id="genre"
+                                                            name="genre">
                                                         <option th:each="genre : ${genres}"
                                                                 th:value="${genre.id}"
                                                                 th:text="${genre.name}"
-                                                                th:selected="${movie.genres.contains(genre)}">Chiến tranh</option>
+                                                                th:selected="${movie.genres.contains(genre)}">Chiến
+                                                            tranh
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -92,11 +98,14 @@
                                             <div class="form-group">
                                                 <label>Đạo diễn</label>
                                                 <div class="select2-purple">
-                                                    <select class="select2 form-control" multiple="multiple" id="director" name="director">
+                                                    <select class="select2 form-control" multiple="multiple"
+                                                            id="director" name="director">
                                                         <option th:each="director : ${directors}"
                                                                 th:value="${director.id}"
                                                                 th:text="${director.name}"
-                                                                th:selected="${movie.directors.contains(director)}">đạo diễn 1</option>
+                                                                th:selected="${movie.directors.contains(director)}">đạo
+                                                            diễn 1
+                                                        </option>
 
                                                     </select>
                                                 </div>
@@ -105,11 +114,13 @@
                                             <div class="form-group">
                                                 <label>Diễn viên</label>
                                                 <div class="select2-purple">
-                                                    <select class="select2 form-control" multiple="multiple" id="actor" name="actor">
+                                                    <select class="select2 form-control" multiple="multiple" id="actor"
+                                                            name="actor">
                                                         <option th:each="actor : ${actors}"
                                                                 th:value="${actor.id}"
                                                                 th:text="${actor.name}"
-                                                                th:selected="${movie.actors.contains(actor)}">đạo diễn 1</option>
+                                                                th:selected="${movie.actors.contains(actor)}">đạo diễn 1
+                                                        </option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -203,24 +214,32 @@
                                 <th></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="episode-content">
                             <tr th:each="episode, e : ${listEpisodes}">
                                 <td th:text="${e.index + 1}">1</td>
                                 <td th:text="${episode.name}">Tập full</td>
-                                <td    th:text="${episode.videoUrl}"
-                                        class="videoUrl" style="word-break: break-all">https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4</td>
+                                <td th:text="${episode.videoUrl}"
+                                    class="videoUrl" style="word-break: break-all">
+                                    https://videos.pexels.com/video-files/3209828/3209828-hd_1280_720_25fps.mp4
+                                </td>
                                 <td class="duration" th:text="${episode.duration}">90</td>
                                 <td th:text="${episode.status ? 'Công khai' : 'Chưa công khai'}">Công khai</td>
                                 <td>
                                     <label class="btn btn-warning btn-sm mb-0" for="input-video-206">
                                         <i class="fas fa-upload"></i>
                                     </label>
-                                    <input type="file" id="input-video-206" class="d-none" onchange="uploadEpisodeVideo(206, event)">
-                                    <button class="btn btn-primary btn-sm btn-preview" th:onclick="|showEpisodePreview(${episode.id})|">
+                                    <input type="file" id="input-video-206" class="d-none"
+                                           onchange="uploadEpisodeVideo(206, event)">
+                                    <button class="btn btn-primary btn-sm btn-preview"
+                                            th:onclick="|showEpisodePreview(${episode.id})|">
                                         <i class="fas fa-play"></i>
                                     </button>
-                                    <button class="btn btn-success btn-sm" onclick="openModalUpdateEpisode(206)"><i class="fas fa-pencil-alt"></i></button>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteEpisode(206)"><i class="fas fa-trash-alt"></i></button>
+                                    <button class="btn btn-success btn-sm"
+                                            id="btn-update-episode"
+                                            th:onclick="|openModalUpdateEpisode(${episode.id})|"><i
+                                            class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn btn-danger btn-sm" th:onclick="|deleteEpisode(${episode.id})|"><i
+                                            class="fas fa-trash-alt"></i></button>
                                 </td>
                             </tr>
                             </tbody>
@@ -253,7 +272,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Default Modal</h4>
+                        <h4 class="modal-title">Tạo Tập Phim</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -276,7 +295,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                                <button type="submit" class="btn btn-primary" id="btn-create-episode">Xác nhận</button>
                             </div>
                         </form>
                     </div>
@@ -284,8 +303,6 @@
             </div>
         </div>
     </div>
-
-
 
 </div>
 </div>
@@ -328,7 +345,7 @@
         $(".select2").select2();
 
         const movie = [[${movie}]]
-        const episodes = [[${listEpisodes}]]
+        let episodes = [[${listEpisodes}]]
 
         $('#form-update-movie').validate({
             rules: {
@@ -458,7 +475,7 @@
         let files;
 
         fileUploadEL.addEventListener('change', (e) => {
-            files  = e.target.files;
+            files = e.target.files;
 
             console.log("files", files[0])
         })
@@ -476,7 +493,7 @@
             console.log(formData);
 
             try {
-                let res = await axios.post(`/api/admin/movie/${movie.id}/upload-poster` , formData);
+                let res = await axios.post(`/api/admin/movie/${movie.id}/upload-poster`, formData);
                 console.log(res.data)
                 toastr.success("Bạn đã cập nhật ảnh thành công");
             } catch (e) {
@@ -485,11 +502,153 @@
             }
         });
 
+        //render episode
+        const episodeListEl = document.getElementById("episode-content");
+        const renderEpisode = (episodes) => {
+            if (episodeListEl.length === 0) {
+                episodeListEl.innerHTML = "<div>Không có tập phim</div>";
+                return;
+            }
+
+            let html = "";
+
+            episodes.forEach((episode, i) => {
+                html += `
+                <tr>
+                                <td >${i + 1}</td>
+                                <td >${episode.name}</td>
+                                <td
+                                    class="videoUrl" style="word-break: break-all">${episode.videoUrl}</td>
+                                <td class="duration" th:text="${episode.duration}">90</td>
+                                <td >${episode.status ? 'Công khai' : 'Chưa công khai'}"</td>
+                                <td>
+                                    <label class="btn btn-warning btn-sm mb-0" for="input-video-206">
+                                        <i class="fas fa-upload"></i>
+                                    </label>
+                                    <input type="file" id="input-video-206" class="d-none" onchange="uploadEpisodeVideo(206, event)">
+                                    <button class="btn btn-primary btn-sm btn-preview" th:onclick="|showEpisodePreview(${episode.id})|">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-sm" onclick="openModalUpdateEpisode(${episode.id})"><i class="fas fa-pencil-alt"></i></button>
+                                    <button class="btn btn-danger btn-sm" onclick="deleteEpisode(${episode.id})"><i class="fas fa-trash-alt"></i></button>
+                                </td>
+                 </tr>
+                `;
+            });
+            episodeListEl.innerHTML = html;
+        };
+
+        // create episode
+        const nameEpisodeEl = document.getElementById('episodeName');
+        const displayOrderEpisodeEl = document.getElementById('episodeDisplayOrder');
+        const statusEpisodeEl = document.getElementById('episodeStatus')
+        const btnCreateEpisode = document.getElementById('btn-create-episode');
+
+        // reset episode
+        const resetEpisode = () => {
+            nameEpisodeEl.value = ""
+            displayOrderEpisodeEl.value = ""
+            statusEpisodeEl.value = false;
+        }
+
+        const modalEpisodeObj = new bootstrap.Modal(document.getElementById('modalEpisode'), {
+            keyboard: false
+        });
+        const openModalCreateEpisode = () => {
+            modalEpisodeObj.show();
+        }
+
+        const createEpisode = async () => {
+            // tao request
+            const request = {
+                name: nameEpisodeEl.value,
+                displayOrder: Number(displayOrderEpisodeEl.value),
+                status: statusEpisodeEl.value === true,
+                movieId: movie.id
+            }
+
+
+            // goi api
+            try {
+                let res = await axios.post(`/api/admin/episodes`, request);
+                episodes.push(res.data);
+                episodes.sort((o1, o2) => {
+                    return o1.displayOrder - o2.displayOrder
+                })
+                renderEpisode(episodes)
+                resetEpisode();
+                modalEpisodeObj.hide();
+                toastr.success("Bạn đã tạo tập phim thành công");
+            } catch (e) {
+                toastr.error("Tạo phim thất bại");
+            }
+        }
+
+        // update episode
+        let idUpdateEpisode = null;
+        const openModalUpdateEpisode = (episodeId) => {
+            const episode = episodes.find(e => e.id === episodeId);
+            nameEpisodeEl.value = episode.name;
+            displayOrderEpisodeEl.value = episode.displayOrder;
+            statusEpisodeEl.value = episode.status;
+            idUpdateEpisode = episodeId;
+            modalEpisodeObj.show();
+        }
+
+        const updateEpisode = async () => {
+            const request = {
+                name: nameEpisodeEl.value,
+                displayOrder: Number(displayOrderEpisodeEl.value),
+                status: statusEpisodeEl.value === true,
+            }
+
+            try {
+                let res = await axios.put(`/api/admin/episodes/${idUpdateEpisode}`, request);
+                const index = episodes.findIndex(e => e.id === idUpdateEpisode);
+                episodes[index] = res.data;
+                renderEpisode(episodes);
+                modalEpisodeObj.hide();
+                toastr.success("Cập nhật tập phim thành công");
+            } catch (e) {
+                console.log(e)
+                toastr.error("Cập nhật phim thất bại");
+            }
+        }
+
+        //btn-submit
+        btnCreateEpisode.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (idUpdateEpisode) {
+                updateEpisode()
+            } else {
+                createEpisode();
+            }
+        })
+
+        // delete episode
+        const deleteEpisode = async (episodeId) => {
+            const isConfirm = confirm("Bạn có muốn xoá tập phim này không");
+            if(!isConfirm) {
+                return;
+            }
+
+            try {
+                const res = await axios.delete(`/api/admin/episodes/${episodeId}`);
+                episodes = episodes.filter(e => e.id !== episodeId);
+                renderEpisode(episodes);
+                toastr.success("Bạn đã xoá tập phim thành công");
+            } catch (e) {
+                console.log(e)
+                toastr.error("Bạn đã xoá tập phim thất bại");
+            }
+        }
+
         //modal-preview
         const modalPreviewObj = new bootstrap.Modal(document.getElementById('modalPreview'), {
             keyboard: false
         });
         const videoEpisodeEl = document.getElementById('videoSource');
+
 
         const showEpisodePreview = (episodeId) => {
             modalPreviewObj.show();
@@ -509,7 +668,7 @@
                 showEpisodePreview(episodeId);
             })
         })
-
+        renderEpisode(episodes);
     </script>
 </th:block>
 </body>

@@ -17,6 +17,6 @@ public class CourseService {
     }
 
     public List<Course> getCourseNew(Boolean status) {
-        return courseRepository.findTop6ByStatusOrderByRatingDesc(status);
+        return courseRepository.findTop6ByStatusOrderByCreatedAtDesc(status);
     }
 }
