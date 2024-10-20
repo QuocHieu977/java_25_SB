@@ -1,34 +1,35 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="main-layout(title, null, content, null)">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:fragment="main-layout(title, null, content, js)">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!--  title rieng  -->
-    <title th:replace="${title}">Document</title>
+  <!--  title rieng  -->
+  <title th:replace="${title}">Document</title>
 
-    <link rel="apple-touch-icon" th:href="@{/web-assets/images/favicon.png}"/>
-    <link rel="shortcut icon" th:href="@{/web-assets/images/favicon.ico}"/>
-    <link rel="stylesheet" th:href="@{/web-assets/css/feather.css}"/>
-    <link rel="stylesheet" th:href="@{/web-assets/css/nice-select2.css}"/>
-    <link rel="stylesheet" th:href="@{/web-assets/css/glightbox.min.css}"/>
-    <link rel="stylesheet" th:href="@{/web-assets/css/swiper-bundle.min.css}"/>
-    <link rel="stylesheet" th:href="@{/web-assets/css/header.css}">
-    <link rel="stylesheet" th:href="@{/web-assets/css/style.css}"/>
+  <link rel="apple-touch-icon" th:href="@{/web-assets/images/favicon.png}"/>
+  <link rel="shortcut icon" th:href="@{/web-assets/images/favicon.ico}"/>
+  <link rel="stylesheet" th:href="@{/web-assets/css/feather.css}"/>
+  <link rel="stylesheet" th:href="@{/web-assets/css/nice-select2.css}"/>
+  <link rel="stylesheet" th:href="@{/web-assets/css/glightbox.min.css}"/>
+  <link rel="stylesheet" th:href="@{/web-assets/css/swiper-bundle.min.css}"/>
+  <link rel="stylesheet" th:href="@{/web-assets/css/header.css}">
+  <link rel="stylesheet" th:href="@{/web-assets/css/style.css}"/>
 
-    <!--  link private  -->
-    <link rel="stylesheet"/>
+  <!--  link css private  -->
+  <!--  <th:block th:replace="${css}"></th:block>-->
 
 </head>
 <body>
 
 <!-- loading -->
 <div id="preloader">
-    <div class="preloader">
-        <span></span>
-        <span></span>
-    </div>
+  <div class="preloader">
+    <span></span>
+    <span></span>
+  </div>
 </div>
 
 <!-- Header -->
@@ -51,5 +52,8 @@
 <script th:src="@{/web-assets/js/purecounter_vanilla.js}"></script>
 <script th:src="@{/web-assets/js/plyr.min.js}"></script>
 <script th:src="@{/web-assets/js/custom.js}"></script>
+
+<!-- link js private -->
+<th:block th:replace="${js}"></th:block>
 </body>
 </html>

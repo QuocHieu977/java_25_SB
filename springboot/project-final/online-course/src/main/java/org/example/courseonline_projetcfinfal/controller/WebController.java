@@ -19,16 +19,12 @@ public class WebController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public String getCategory(Model model) {
-        List<Category> categories = categoryService.getAllCategory();
-        System.out.println("categories" + categories.size());
-        return "web/fragments/header";
-    }
-
-    @GetMapping
     public String getHomePage(Model model) {
         List<Course> listCoursePopular = courseService.getCourseByRating(true);
         List<Course> listCourseNew = courseService.getCourseNew(true);
+        List<Category> categories = categoryService.getAllCategory();
+
+        model.addAttribute("categories", categories);
         model.addAttribute("listCoursePopular", listCoursePopular);
         model.addAttribute("listCourseNew", listCourseNew);
 

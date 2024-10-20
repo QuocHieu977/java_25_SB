@@ -18,45 +18,17 @@
                     <div class="d-flex align-items-center category">
                         Thể loại
                         <ul class="list-category shadow">
-                            <li class="item">
-                                Java fullstack
-                                <i class="fa-solid fa-angle-right"></i>
-                                <ul class="sub-menu">
-                                    <li>li 1</li>
-                                    <li>li 2</li>
-                                    <li>li 3</li>
-                                    <li>li 4</li>
+                            <li class="item" th:each="category :${categories}"
+                                th:if="${category.parent_int} == null">
+                                <a href="#" th:text="${category.name}">
+                                    Java fullstack
+                                </a>
+                                <i class="feather-icon icon-arrow-right"></i>
+                                <ul class="sub-menu"
+                                    th:each="subCategory :${categories}"
+                                    th:if="${subCategory.parent_int} == ${category.id}">
+                                    <li ><a href="#" th:text="${category.name}">li 1</a></li>
                                 </ul>
-                            </li>
-                            <li class="item">
-                                web
-                                <i class="fa-solid fa-angle-right"></i>
-                                <ul class="sub-menu">
-                                    <li>li 1</li>
-                                    <li>li 2</li>
-                                    <li>li 3</li>
-                                    <li>li 4</li>
-                                </ul>
-                            </li>
-                            <li class="item">
-                                Php
-                                <i class="fa-solid fa-angle-right"></i>
-                                <ul class="sub-menu">
-                                    <li>li 1</li>
-                                    <li>li 2</li>
-                                    <li>li 3</li>
-                                    <li>li 4</li>
-                                </ul>
-                            </li>
-
-                            <li class="item">
-                                Php
-                                <i class="fa-solid fa-angle-right"></i>
-                            </li>
-
-                            <li class="item">
-                                Php
-                                <i class="fa-solid fa-angle-right"></i>
                             </li>
                         </ul>
                     </div>
