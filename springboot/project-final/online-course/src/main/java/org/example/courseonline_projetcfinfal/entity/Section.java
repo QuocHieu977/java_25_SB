@@ -16,22 +16,23 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "sections")
 public class Section {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
 
-    String title;
-    String slug;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  Integer id;
 
-    @Column(columnDefinition = "MEDIUMTEXT")
-    String description;
+  String title;
+  String slug;
 
-    Integer displayOrder;
-    Boolean status;
-    LocalDateTime createdAt;
-    LocalDateTime updatedAt;
+  @Column(columnDefinition = "MEDIUMTEXT")
+  String description;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    Course course;
+  Integer displayOrder;
+  Boolean status;
+  LocalDateTime createdAt;
+  LocalDateTime updatedAt;
+
+  @ManyToOne
+  @JoinColumn(name = "course_id")
+  Course course;
 }

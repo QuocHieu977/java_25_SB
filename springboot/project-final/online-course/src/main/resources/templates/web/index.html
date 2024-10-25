@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/web/layout/layout :: main-layout(~{::title}, null, ~{::#content}, null)}">
+      th:replace="~{/web/layout/layout :: main-layout(~{::title}, ~{::#css}, ~{::#content}, ~{::#js})}">
 
 <head>
   <meta charset="utf-8"/>
@@ -12,6 +12,10 @@
         content="bootstrap 5, online course, education, creative, gulp, business, minimal, modern, course, one page, responsive, saas, e-Learning, seo, startup, html5, site template"/>
   <meta name="author" content="theme-village"/>
   <title>Khóa học online - Học mọi thứ theo lịch trình của bạn | Eduxo</title>
+
+  <th:block id="css">
+    <link rel="stylesheet" href="">
+  </th:block>
 </head>
 
 <body>
@@ -188,7 +192,7 @@
                   <div class="ratings me-2">
                     <th:block
                         th:each="i : ${#numbers.sequence(1, T(java.lang.Math).round(course.rating))}">
-                      <a href="#"><img src="/web-assets/images/icons/star.png" alt/></a>
+                      <a href="#"><img src="/web-assets/images/icons/star.png" alt="Star"/></a>
                     </th:block>
                   </div>
                   <span class="rating-count">(15)</span>
@@ -346,6 +350,10 @@
       </div>
     </div>
   </section>
+</th:block>
+
+<th:block id="js">
+  <script src=""></script>
 </th:block>
 </body>
 </html>

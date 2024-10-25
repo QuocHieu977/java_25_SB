@@ -56,11 +56,14 @@
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="password"/>
                 </div>
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex justify-content-center align-items-center mb-3">
                     <button type="submit" class="btn btn-primary" id="btn-login">Đăng nhập</button>
                 </div>
+
             </form>
+            <div class="mt-2"><a href="/quen-mat-khau">Quên mật khẩu</a></div>
             <span class="mt-2">Bạn có muốn tạo <a href="/dang-ky" class="text-decoration-underline">tài khoản</a> mới không?</span>
+
         </div>
     </div>
 </section>
@@ -152,7 +155,7 @@
                 window.location.href = '/';
             }, 1000);
         } catch (e) {
-            toastr.error("Đăng nhập thất bại");
+            toastr.error(e.response.data.message);
         }
     });
 </script>

@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.example.movieweb.entity.*;
 import org.example.movieweb.model.enums.MovieType;
+import org.example.movieweb.model.response.TokenConfirmMessageResponse;
+import org.example.movieweb.service.AuthService;
 import org.example.movieweb.service.BlogService;
 import org.example.movieweb.service.EpisodeService;
 import org.example.movieweb.service.MovieService;
@@ -29,6 +31,7 @@ public class WebController {
     private final EpisodeService episodeService;
     private final ReviewService reviewService;
     private final ConversionService conversionService;
+    private final AuthService authService;
 
     @GetMapping
     public  String getHomePage(Model model) {
@@ -176,6 +179,32 @@ public class WebController {
     @GetMapping("/dang-ky")
     public String registerPage() {
         return "web/dang-ky";
+    }
+
+//    link = "http://localhost:8080/xac-thuc-tai-khoan?token="
+    @GetMapping("/xac-thuc-tai-khoan")
+    public String verifyAccountPage(@RequestParam String token, Model model) {
+        TokenConfirmMessageResponse response = authService.verifyAccount(token);
+        model.addAttribute("response", response);
+        return "web/xac-thuc-tai-khoan";
+    }
+
+    @GetMapping("/quen-mat-khau")
+    public String forgotPasswordPage(HttpServletRequest request) {
+        User user = (User) request.getSession().getAttribute("currentUser");
+        if (user != null) {
+            return "/";
+        }
+        return "web/quen-mat-khau";
+    }
+
+//    http://localhost:8080/dat-lai-mat-khau?token=" + tokenConfirm.getToken();
+    @GetMapping("/dat-lai-mat-khau")
+    public String resetPasswordPage(@RequestParam String token, Model model) {
+        TokenConfirmMessageResponse response = authService.verifyPassword(token);
+        model.addAttribute("response", response);
+        model.addAttribute("token", token);
+        return "web/dat-lai-mat-khau";
     }
 
 }

@@ -2,8 +2,10 @@ package org.example.movieweb.rest;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.movieweb.model.request.ForgotPasswordRequest;
 import org.example.movieweb.model.request.LoginRequest;
 import org.example.movieweb.model.request.RegisterRequest;
+import org.example.movieweb.model.request.ResetPasswordRequest;
 import org.example.movieweb.model.response.ErrorResponse;
 import org.example.movieweb.service.AuthService;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,18 @@ public class AuthApi {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         authService.register(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/forword-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        authService.forgotPassword(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
+        authService.resetPassword(request);
         return ResponseEntity.ok().build();
     }
 }

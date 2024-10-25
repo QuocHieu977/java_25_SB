@@ -108,7 +108,7 @@ img {
 }
 
 /*login*/
-#form-login, #form-register {
+#form-login, #form-register, #form-forgot-password, #form-reset-password {
     width: 480px;
 }
 

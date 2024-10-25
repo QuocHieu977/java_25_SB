@@ -1,12 +1,12 @@
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:fragment="main-layout(title, null, content, js)">
+      th:fragment="main-layout(title, css, content, js)">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!--  title rieng  -->
   <title th:replace="${title}">Document</title>
 
   <link rel="apple-touch-icon" th:href="@{/web-assets/images/favicon.png}"/>
@@ -18,9 +18,7 @@
   <link rel="stylesheet" th:href="@{/web-assets/css/header.css}">
   <link rel="stylesheet" th:href="@{/web-assets/css/style.css}"/>
 
-  <!--  link css private  -->
-  <!--  <th:block th:replace="${css}"></th:block>-->
-
+  <th:block th:replace="${css}"></th:block>
 </head>
 <body>
 
@@ -39,11 +37,14 @@
 <th:block th:replace="${content}"></th:block>
 
 <!-- Footer -->
-<th:block th:replace="~{web/fragments/footer}"></th:block>
+<th:block th:replace="~{web/fragments/footer :: footer}"></th:block>
 
 <!-- scroll top -->
 <div class="back-top"><i class="feather-icon icon-chevron-up"></i></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script th:src="@{/web-assets/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/web-assets/js/swiper-bundle.min.js}"></script>
 <script th:src="@{/web-assets/js/nice-select2.js}"></script>
@@ -52,8 +53,9 @@
 <script th:src="@{/web-assets/js/purecounter_vanilla.js}"></script>
 <script th:src="@{/web-assets/js/plyr.min.js}"></script>
 <script th:src="@{/web-assets/js/custom.js}"></script>
+<script
+    th:src="@{/web-assets/lib/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js}"></script>
 
-<!-- link js private -->
 <th:block th:replace="${js}"></th:block>
 </body>
 </html>

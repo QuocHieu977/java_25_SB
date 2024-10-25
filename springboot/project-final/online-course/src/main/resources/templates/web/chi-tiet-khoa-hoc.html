@@ -1,48 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{/web/layout/layout :: main-layout(~{::title}, null, ~{::#content}, ~{::#js})}">
+      th:replace="~{web/layout/layout :: main-layout(~{:: title}, ~{:: #css}, ~{:: #content}, ~{:: #js})}">
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description"
-        content="An ideal tempalte for online education, e-Learning, Course School, Online School, Kindergarten, Classic LMS, University, Language Academy, Coaching, Online Course, Single Course, and Course marketplace.">
-  <meta name="keywords"
-        content="bootstrap 5, online course, education, creative, gulp, business, minimal, modern, course, one page, responsive, saas, e-Learning, seo, startup, html5, site template">
-  <meta name="author" content="theme-village">
   <title>Eduxo - Online Courses and Education HTML5 Template</title>
-</head>
 
+  <th:block id="css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.css"
+          integrity="sha512-K1k7jSn9RDKEcn/ugqVVvWYu0bcS3q1w6m/5pQSnrj0bCfIqF6Wk49lkmckSb4wglvTP9V17LtS0q0XxYccXbg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+  </th:block>
+</head>
 <body>
+
 <th:block id="content">
-  <section class="promo-sec"
-           style="background: url('/web-assets/images/promo-bg.jpg')no-repeat center center / cover;">
-    <img src="/web-assets/images/promo-left.png" alt class="anim-img">
-    <img src="/web-assets/images/promo-right.png" alt class="anim-img anim-right">
+  <section class="promo-sec2">
     <div class="container">
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <h1 class="display-2 text-white">Front End Development</h1>
+        <div class="col-lg-7">
           <nav aria-label="breadcrumb mt-0">
             <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="">Home</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Single Course</li>
+              <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+              <li class="breadcrumb-item active" aria-current="page" th:text="${course.title}">
+                chi-tiet-khoa-hoc
+              </li>
             </ol>
           </nav>
+          <div class="course-intro">
+            <h1 th:text="${course.title}">Front End Development from Beginner to Advance</h1>
+            <p class="lead" th:text="${course.description}">Learn Front End, javascript online and
+              supercharge your web design with
+              this
+              Javascript for beginners training
+              course.</p>
+            <div class="d-flex align-items-center mb-3">
+              <span><i class="feather-icon icon-user"></i> <a class="text-reset" href="#"
+                                                              th:each="teacher: ${course.teachers}"
+                                                              th:text="${course.teachers[0].full_name}">John Doe</a></span>
+              <span><i class="feather-icon icon-award"></i><a class="text-reset" href="#review"
+                                                              th:text="'Đánh giá: '+ ${course.rating}"><img
+                  src="/web-assets/images/icons/ratings.svg" alt="ratings">(4.8)</a></span>
+              <span class="enrollment"><i
+                  class="feather-icon icon-users"></i> Học viên: 2392 </span>
+              <span class="last-update"><i class="feather-icon icon-calendar"></i>
+                <span
+                    th:text="${'Cập nhật: ' + #temporals.format(course.createdAt, 'dd-MM-yyyy')}"></span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="course-details-sec sec-padding">
+  <section class="course-details-sec">
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
-          <article class="course-details">
+          <article class="course-details pe-lg-4">
             <img class="rounded-3 img-fluid" src="/web-assets/images/course-details.jpg"
                  alt="Course">
-            <div class="course-details-meta d-lg-flex align-items-center justify-content-between">
+            <div class="course-details-meta d-sm-flex align-items-center justify-content-between">
               <div class="d-flex">
                 <div class="avatar">
                   <img width="56" class="rounded-circle" src="/web-assets/images/avatar2.png"
@@ -73,38 +95,29 @@
             </div>
 
             <div class="course-nav">
-              <ul class="nav" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
-                          data-bs-target="#home" type="button" role="tab" aria-controls="home"
-                          aria-selected="true"><i class="feather-icon icon-bookmark"></i> Overview
-                  </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
-                          data-bs-target="#profile"
-                          type="button" role="tab" aria-controls="profile" aria-selected="false"><i
-                      class="feather-icon icon-box"></i> Curriculum
-                  </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
-                          data-bs-target="#contact"
-                          type="button" role="tab" aria-controls="contact" aria-selected="false"><i
-                      class="feather-icon icon-user"></i> Instructor
-                  </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <button class="nav-link" id="review-tab" data-bs-toggle="tab"
-                          data-bs-target="#review"
-                          type="button" role="tab" aria-controls="review" aria-selected="false"><i
-                      class="feather-icon icon-star"></i> Review
-                  </button>
-                </li>
-              </ul>
-              <div class="tab-content inner-sec" id="myTabContent">
-                <div class="tab-pane fade show active" id="home" role="tabpanel"
-                     aria-labelledby="home-tab">
+              <nav id="navbar-example2" class="bg-white sticky-top">
+                <ul class="nav nav-pills">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#overview"><i class="feather-icon icon-bookmark"></i>
+                      Overview</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#course"><i class="feather-icon icon-box"></i>
+                      Curriculum</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#instructor"><i class="feather-icon icon-user"></i>
+                      Instructor</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#review"><i
+                        class="feather-icon icon-star"></i>Review</a>
+                  </li>
+                </ul>
+              </nav>
+              <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0"
+                   class="scrollspy-example" tabindex="0">
+                <div class="inner-sec" id="overview">
                   <h2 class="display-4 fw-bold">
                     Course Overview
                   </h2>
@@ -137,8 +150,7 @@
                     topic. Consider how it might
                     evolve and continue to shape the education landscape</p>
                 </div>
-                <div class="tab-pane  fade" id="profile" role="tabpanel"
-                     aria-labelledby="profile-tab">
+                <div class="inner-sec" id="course">
                   <h2 class="display-4 fw-bold">
                     Course Content
                   </h2>
@@ -451,10 +463,10 @@ Persona Development
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="contact" role="tabpanel"
-                     aria-labelledby="contact-tab">
+                <div class="inner-sec" id="instructor">
                   <h2 class="display-4">Instructor</h2>
-                  <div class="author-card d-flex align-items-center border rounded-2 bg-shade p-3">
+                  <div
+                      class="author-card d-md-flex align-items-center border rounded-2 bg-shade p-3">
                     <div class="author-img">
                       <img src="/web-assets/images/instructor-lg.jpg" alt="Instructor"
                            class="img-fluid rounded-3">
@@ -464,10 +476,12 @@ Persona Development
                       <small class="text-mute">Arts Instructor</small>
                       <p>This is a comprehensive outline, and the actual content and duration of
                         each
-                        module may vary based on the course
+                        module
+                        may vary based on the course
                         format
                         and duration. Hands-on activities, case studies, and real-world projects
-                        should be integrated throughout the course
+                        should be
+                        integrated throughout the course
                         to
                         enhance practical skills.</p>
                       <div class="social-share white mt-3">
@@ -479,105 +493,47 @@ Persona Development
                     </div>
                   </div>
                 </div>
-                <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                  <h2 class="display-4">Reviews (02)</h2>
+                <div class="inner-sec" id="review">
+                  <h2 class="display-4">Đánh Giá</h2>
                   <div class="entry-comments mt-5">
                     <div class="post-comments">
                       <ol class="comment-list list-unstyled">
-                        <li>
+                        <li th:each="review: ${reviews}">
                           <article class="comment-entry">
                             <div class="d-sm-flex align-items-top">
                               <div class="comment-thumb">
                                 <img width="80" class="img-fluid rounded-circle"
-                                     src="/web-assets/images/avatar5.png" alt="Comments">
+                                     th:src="${review.user.avatar}" alt="Comments">
                               </div>
                               <div class="commentor ms-lg-4 bg-shade p-4 rounded-2">
                                 <div class="d-flex justify-content-between mb-3">
                                   <div class="comment-head">
-                                    <h4 class="display-5 mb-0">Johnathon Smith</h4>
-                                    <small class="text-muted">Nov 12, 2022 at 12:12
-                                      am</small>
+                                    <h4 class="display-5 mb-0" th:text="${review.user.full_name}">
+                                      Johnathon Smith</h4>
+                                    <small class="text-muted"
+                                           th:text="${#temporals.format(review.createdAt, 'dd-MM-yyyy')}">Nov
+                                      12, 2022 at 12:12 am</small>
                                   </div>
                                   <div class="ratings pt-2">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
+                                    <th:block
+                                        th:each="i: ${#numbers.sequence(1, review.rating)}">
+                                      <img src="/web-assets/images/icons/star.png" alt="Star">
+                                    </th:block>
                                   </div>
                                 </div>
-                                <p>Mauris non dignissim purus, ac commodo diam. Donec sit
-                                  amet lacinia nulla. Aliquam quis purus in justo pulvinar
-                                  tempor.</p>
-                              </div>
-                            </div>
-                          </article>
-                          <ol class="children">
-                            <li>
-                              <article class="comment-entry">
-                                <div class="d-sm-flex align-items-top">
-                                  <div class="comment-thumb">
-                                    <img width="80" class="img-fluid rounded-circle"
-                                         src="/web-assets/images/avatar3.png" alt="Comments">
-                                  </div>
-                                  <div class="commentor ms-lg-4 bg-shade p-4 rounded-2">
-                                    <div class="d-flex justify-content-between mb-3">
-                                      <div class="comment-head">
-                                        <h4 class="display-5 mb-0">Andrew Dian</h4>
-                                        <small class="text-muted">Nov 12, 2022 at
-                                          12:12 am</small>
-                                      </div>
-                                      <div class="ratings pt-2">
-                                        <img src="/web-assets/images/icons/star.png" alt="Star">
-                                        <img src=/web-assets/"images/icons/star.png" alt="Star">
-                                        <img src="/web-assets/images/icons/star.png" alt="Star">
-                                        <img src="/web-assets/images/icons/star.png" alt="Star">
-                                        <img src="/web-assets/images/icons/star-half.png"
-                                             alt="Star">
-                                      </div>
-                                    </div>
-                                    <p>Mauris non dignissim purus, ac commodo diam.
-                                      Donec sit amet lacinia nulla. Aliquam quis purus
-                                      in justo
-                                      pulvinar tempor.</p>
-                                  </div>
-                                </div>
-                              </article>
-                            </li>
-                          </ol>
-                        </li>
-                        <li>
-                          <article class="comment-entry">
-                            <div class="d-sm-flex align-items-top">
-                              <div class="comment-thumb">
-                                <img width="80" class="img-fluid rounded-circle"
-                                     src="/web-assets/images/avatar4.png" alt="Comments">
-                              </div>
-                              <div class="commentor ms-lg-4 bg-shade p-4 rounded-2">
-                                <div class="d-flex justify-content-between mb-3">
-                                  <div class="comment-head">
-                                    <h4 class="display-5 mb-0">Mc Donald</h4>
-                                    <small class="text-muted">Nov 12, 2022 at 12:12
-                                      am</small>
-                                  </div>
-                                  <div class="ratings pt-2">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                                    <img src="/web-assets/images/icons/star-half.png" alt="Star">
-                                  </div>
-                                </div>
-                                <p>Mauris non dignissim purus, ac commodo diam. Donec sit
-                                  amet lacinia nulla. Aliquam quis purus in justo
-                                  pulvinar tempor.</p>
+                                <p th:text="${review.content}">Mauris non dignissim purus, ac
+                                  commodo diam. Donec sit amet
+                                  lacinia
+                                  nulla. Aliquam quis purus in justo pulvinar tempor.</p>
                               </div>
                             </div>
                           </article>
                         </li>
                       </ol>
                     </div>
-                    <div class="contact-form contact2-sec mt-5">
+                    <div id="review-pagination"
+                         class="d-flex justify-content-center align-items-center"></div>
+                    <div class="comment-form mt-5">
                       <h3 class="display-4">Add a Review</h3>
                       <div class="d-flex align-items-center">
                         <span>Rate This Course:</span>
@@ -597,13 +553,15 @@ Persona Development
                           <input type="text" placeholder="Email Address">
                         </div>
                         <div class="col-lg-12 form-group">
-                                                <textarea name="message" id="message" rows="8"
-                                                          placeholder="Comment"></textarea>
+                        <textarea name="message" id="message" rows="8"
+                                  placeholder="Comment"></textarea>
                         </div>
                         <div class="form-group">
                           <input type="checkbox" id="check">
                           <label for="check">Save my name, email, and website in this browser for
-                            the next time I comment.</label>
+                            the
+                            next
+                            time I comment.</label>
                         </div>
                         <div class="col-lg-12">
                           <button class="btn btn-primary mt-4">Leave a Review</button>
@@ -611,106 +569,31 @@ Persona Development
                       </form>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
           </article>
-          <div class="related-course pt-5">
-            <div class="row">
-              <div class="d-flex justify-content-between align-items-center pb-5">
-                <h2 class="display-4">More Course By <a href="#" class="text-primary">John Doe</a>
-                </h2>
-                <a href="" class="btn btn-outline-primary">View all Course</a>
-              </div>
-              <div class="col-lg-6">
-                <div class="course-entry-3 card rounded-2 bg-white border">
-                  <div class="card-media position-relative">
-                    <a href=""><img class="card-img-top" src="/web-assets/images/course6.jpg"
-                                    alt="Course"></a>
-                    <a href="#"
-                       class="action-wishlist position-absolute text-white icon-xs rounded-circle"><img
-                        src="images/icons/heart-fill.svg" alt="Wishlist"></a>
-                  </div>
-                  <div class="card-body">
-                    <div class="course-meta d-flex justify-content-between align-items-center mb-2">
-                      <div class="d-flex align-items-center">
-                        <img src="images/icons/star.png" alt>
-                        <strong>4.5</strong>
-                        <span class="rating-count d-none d-xl-block">(1k reviews)</span>
-                      </div>
-                      <span><i class="feather-icon icon-video me-2"></i>25 hours 22m</span>
-                      <span class="lead"><a href="#" class="text-reset"><i
-                          class="feather-icon icon-bookmark"></i></a></span>
-                    </div>
-                    <h3 class="sub-title mb-0">
-                      <a href="">Comprehensive Introduction to Programming</a>
-                    </h3>
-                    <div
-                        class="author-meta small d-flex pt-2 justify-content-between align-items-center mb-3">
-                                        <span>By: <a href="#" class="text-reset">Brad Traversy</a>, <a
-                                            href="#"
-                                            class="text-reset">Mark Joe</a></span>
-                      <span>12,580 Students</span>
-                    </div>
-                    <div
-                        class="course-footer d-flex align-items-center justify-content-between pt-3">
-                      <div class="price">$20.00
-                        <del>$35.00</del>
-                      </div>
-                      <a href="#">Enroll Now <i class="feather-icon icon-arrow-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="course-entry-3 card rounded-2 bg-white border">
-                  <div class="card-media position-relative">
-                    <a href="single-course.html"><img class="card-img-top" src="images/course5.jpg"
-                                                      alt="Course"></a>
-                    <a href="#"
-                       class="action-wishlist position-absolute text-white icon-xs rounded-circle"><img
-                        src="/web-assets/images/icons/heart-fill.svg" alt="Wishlist"></a>
-                  </div>
-                  <div class="card-body">
-                    <div class="course-meta d-flex justify-content-between align-items-center mb-2">
-                      <div class="d-flex align-items-center">
-                        <img src="/web-assets/images/icons/star.png" alt>
-                        <strong>4.5</strong>
-                        <span class="rating-count d-none d-xl-block">(1k reviews)</span>
-                      </div>
-                      <span><i class="feather-icon icon-video me-2"></i>25 hours 22m</span>
-                      <span class="lead"><a href="#" class="text-reset"><i
-                          class="feather-icon icon-bookmark"></i></a></span>
-                    </div>
-                    <h3 class="sub-title mb-0">
-                      <a href="single-course.html">The Complete Python Pro Bootcamp for 2023</a>
-                    </h3>
-                    <div
-                        class="author-meta small d-flex pt-2 justify-content-between align-items-center mb-3">
-                                        <span>By: <a href="#" class="text-reset">Brad Traversy</a>, <a
-                                            href="#"
-                                            class="text-reset">Mark Joe</a></span>
-                      <span>12,580 Students</span>
-                    </div>
-                    <div
-                        class="course-footer d-flex align-items-center justify-content-between pt-3">
-                      <div class="price">$20.00
-                        <del>$35.00</del>
-                      </div>
-                      <a href="#">Enroll Now <i class="feather-icon icon-arrow-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div class="col-lg-4">
-          <aside class="sidebar ps-lg-4">
-            <div class="widget price-widget border p-4 rounded-3">
-              <h3 class="display-4">$19.99
-                <del>$36.99</del>
-              </h3>
+          <aside class="sidebar sticky-top widget-top">
+            <div class="widget price-widget bg-white border p-3 rounded-3">
+              <div class="course-preview mb-3">
+                <img src="/web-assets/images/course2.jpg" alt="Course preview" class="img-fluid">
+                <div class="video-block-sm">
+                  <div class="waves wave-1"></div>
+                  <div class="waves wave-2"></div>
+                  <div class="waves wave-3"></div>
+                  <a class="cover-video" href="https://www.youtube.com/watch?v=tUP5S4YdEJo"><img
+                      src="/web-assets/images/icons/play.png" alt></a>
+                </div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <h3 class="display-4">$19.99
+                  <del>$36.99</del>
+                </h3>
+                <span class="badge bg-danger"><i class="feather-icon icon-clock me-1"></i>5 days left!</span>
+              </div>
               <div class="btn-cta mt-4">
                 <a href="#" class="btn btn-primary rounded-2 w-100">Add to Cart</a>
                 <a href="#" class="mt-3 btn btn-outline-primary rounded-2 w-100">Enroll Now</a>
@@ -741,60 +624,12 @@ Persona Development
                   <a href="#"><i class="feather-icon icon-twitter"></i></a>
                   <a href="#"><i class="feather-icon icon-instagram"></i></a>
                 </div>
-                <a href="tel:8022882" class="btn btn-outline-primary mt-2"><i
-                    class="feather-icon icon-phone me-2"></i>Call Us: 802 288 012</a>
-              </div>
-            </div>
-            <div class="widget recent-entry">
-              <h3 class="widget-title">Related Courses</h3>
-              <div class="widget-inner">
-                <div class="rc-entry d-flex">
-                  <img width="80" src="images/course-x1.jpg" alt="Course"
-                       class="img-fluid rounded-3">
-                  <div class="course-info ms-3">
-                    <div class="ratings">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                    </div>
-                    <h6 class="text-nowrap my-1"><a href="single-course.html">Learn Today for...</a>
-                    </h6>
-                    <h6 class="text-primary">$38.00</h6>
-                  </div>
-                </div>
-                <div class="rc-entry d-flex">
-                  <img width="80" src="images/rc-2.jpg" alt="Course" class="img-fluid rounded-3">
-                  <div class="course-info ms-3">
-                    <div class="ratings">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                    </div>
-                    <h6 class="text-nowrap my-1"><a href="single-course.html">No Child Should
-                      be...</a>
-                    </h6>
-                    <h6 class="text-primary">$38.00</h6>
-                  </div>
-                </div>
-                <div class="rc-entry d-flex">
-                  <img width="80" src="images/rc-3.jpg" alt="Course" class="img-fluid rounded-3">
-                  <div class="course-info ms-3">
-                    <div class="ratings">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                      <img src="/web-assets/images/icons/star.png" alt="Rating">
-                    </div>
-                    <h6 class="text-nowrap my-1"><a href="single-course.html">Basics of
-                      Designing...</a>
-                    </h6>
-                    <h6 class="text-primary">$38.00</h6>
-                  </div>
+                <div class="coupon-form">
+                  <form action="#" class="position-relative">
+                    <input type="text" placeholder="Coupon">
+                    <button class="btn btn-secondary text-info position-absolute right-0">Apply
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -825,11 +660,23 @@ Persona Development
       </div>
     </div>
   </section>
+
 </th:block>
 
 <th:block id="js">
-  <script data-cfasync="false"
-          src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script th:inline="javascript">
+    let reviews = [[${reviews}]];
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+          integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.6.0/pagination.min.js"
+          integrity="sha512-GzbaI5EsNzdEUq6/2XLYpr1y9CUZRIVsUeWTAFgULtQa5jZ3Nug8i0nZKM6jp9NffBCZhymPPQFcF0DK+JkRpw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script th:src="@{/web-assets/js/main/review.js}"></script>
 </th:block>
 </body>
 

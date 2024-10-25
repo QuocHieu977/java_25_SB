@@ -10,13 +10,19 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CourseService {
-    private final CourseRepository courseRepository;
 
-    public List<Course> getCourseByRating(Boolean status) {
-        return courseRepository.findTop6ByStatusOrderByRatingDesc(status);
-    }
+  private final CourseRepository courseRepository;
 
-    public List<Course> getCourseNew(Boolean status) {
-        return courseRepository.findTop6ByStatusOrderByCreatedAtDesc(status);
-    }
+  public List<Course> getCourseByRating(Boolean status) {
+    return courseRepository.findTop6ByStatusOrderByRatingDesc(status);
+  }
+
+  public List<Course> getCourseNew(Boolean status) {
+    return courseRepository.findTop6ByStatusOrderByCreatedAtDesc(status);
+  }
+
+  public Course getCourseDetails(Integer id, String slug) {
+    return courseRepository.findByIdAndSlugAndStatus(id, slug, true)
+        .orElse(null);
+  }
 }
