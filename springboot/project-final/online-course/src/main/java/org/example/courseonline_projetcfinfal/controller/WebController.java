@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.example.courseonline_projetcfinfal.entity.Category;
 import org.example.courseonline_projetcfinfal.entity.Course;
 import org.example.courseonline_projetcfinfal.entity.Review;
+import org.example.courseonline_projetcfinfal.entity.Section;
 import org.example.courseonline_projetcfinfal.service.CategoryService;
 import org.example.courseonline_projetcfinfal.service.CourseService;
 import org.example.courseonline_projetcfinfal.service.ReviewService;
+import org.example.courseonline_projetcfinfal.service.SectionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,7 @@ public class WebController {
   private final CourseService courseService;
   private final CategoryService categoryService;
   private final ReviewService reviewService;
+  private final SectionService sectionService;
 
   @ModelAttribute("categories")
   public List<Category> getCategories() {
@@ -47,6 +50,9 @@ public class WebController {
     List<Review> reviews = reviewService.getReviewsByCourseId(course.getId());
     model.addAttribute("reviews", reviews);
 
+    List<Section> sections = sectionService.getSectionByCourseId(course.getId());
+    model.addAttribute("sections", sections);
+    
     return "web/chi-tiet-khoa-hoc";
   }
 }

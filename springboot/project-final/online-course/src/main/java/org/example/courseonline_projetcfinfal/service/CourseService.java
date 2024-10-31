@@ -2,6 +2,7 @@ package org.example.courseonline_projetcfinfal.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.courseonline_projetcfinfal.entity.Course;
+import org.example.courseonline_projetcfinfal.entity.Section;
 import org.example.courseonline_projetcfinfal.repository.CourseRepository;
 import org.springframework.stereotype.Service;
 

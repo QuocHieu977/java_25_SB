@@ -5,7 +5,9 @@ import org.example.courseonline_projetcfinfal.entity.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
 
   List<Course> findTop6ByStatusOrderByRatingDesc(Boolean status);

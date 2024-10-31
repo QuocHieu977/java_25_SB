@@ -42,12 +42,14 @@
                                                               th:each="teacher: ${course.teachers}"
                                                               th:text="${course.teachers[0].full_name}">John Doe</a></span>
               <span><i class="feather-icon icon-award"></i><a class="text-reset" href="#review"
-                                                              th:text="${course.rating}"><img
+                                                              th:text="'Đánh giá: '+ ${course.rating}"><img
                   src="/web-assets/images/icons/ratings.svg" alt="ratings">(4.8)</a></span>
               <span class="enrollment"><i
                   class="feather-icon icon-users"></i> Học viên: 2392 </span>
-              <span class="last-update"><i class="feather-icon icon-calendar"></i> Updated: 24 Aug,
-2024</span>
+              <span class="last-update"><i class="feather-icon icon-calendar"></i>
+                <span
+                    th:text="${'Cập nhật: ' + #temporals.format(course.createdAt, 'dd-MM-yyyy')}"></span>
+              </span>
             </div>
           </div>
         </div>
@@ -69,12 +71,14 @@
                        alt="avatar">
                 </div>
                 <div class="avatar-info ms-3">
-                  <h5 class="display-5 fw-bold m-0">Charlotte Wilson</h5>
+                  <h5 class="display-5 fw-bold m-0" th:each="teacher : ${course.teachers}"
+                      th:text="${teacher.full_name}">Charlotte
+                    Wilson</h5>
                   <span class="mute-alt">Technology Facilitator</span>
                 </div>
               </div>
               <div class="course-reviews">
-                <h6>Reviews</h6>
+                <h6>Đánh Giá</h6>
                 <div class="d-flex align-items-center">
                   <div class="ratings">
                     <img src="/web-assets/images/icons/star.png" alt>
@@ -87,7 +91,7 @@
                 </div>
               </div>
               <div class="course-cat">
-                <h6>Categories</h6>
+                <h6>Thể Loại</h6>
                 <span class="mute-alt">UI/UX Design</span>
               </div>
             </div>
@@ -150,33 +154,33 @@
                 </div>
                 <div class="inner-sec" id="course">
                   <h2 class="display-4 fw-bold">
-                    Course Content
+                    Nội Dung Khoá Học
                   </h2>
+
                   <div class="accordion-2" id="accordion-course">
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
+                    <div class="accordion-item" th:each="section: ${sections}">
+                      <h2 class="accordion-header" th:id="heading+${section.id}">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true"
-                                aria-controls="collapseOne">
+                                data-bs-target="#collapse" aria-expanded="true"
+                                th:attr="data-bs-target='#collapse' + ${section.id}"
+                                th:aria-controls="collapse+ ${section.id}"
+                                th:text="${section.title}">
                           Understanding UI and UX Design <sub class="ms-2">/ 2 hours 30min</sub>
                         </button>
                       </h2>
-                      <div id="collapseOne" class="accordion-collapse collapse show"
-                           aria-labelledby="headingOne" data-bs-parent="#accordion-course">
+                      <div th:id="collapse+ ${section.id}" class="accordion-collapse collapse show"
+                           th:aria-labelledby="heading+${section.id}"
+                           data-bs-parent="#accordion-course">
                         <div class="accordion-body">
                           <div class="lesson-items">
                             <ul class="list-unstyled">
                               <li><a href="#"
                                      class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-51.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
+                                <span class="lesson-title">
+                                  <img src="/web-assets/images/icons/video.png" alt="Video">Persona Development
+                                </span>
+                                <span>51.08<img src="/web-assets/images/icons/lock.png" alt="Lock"></span></a>
+                              </li>
                               <li><a href="#"
                                      class="d-flex justify-content-between align-items-center">
 <span class="lesson-title">
@@ -204,263 +208,10 @@ Persona Development
                         </div>
                       </div>
                     </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="heading2">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse2"
-                                aria-expanded="true" aria-controls="collapse2">
-                          Roles in UI/UX Design <sub class="ms-2">/ 3 hours 10min</sub>
-                        </button>
-                      </h2>
-                      <div id="collapse2" class="accordion-collapse collapse "
-                           aria-labelledby="heading2" data-bs-parent="#accordion-course">
-                        <div class="accordion-body">
-                          <div class="lesson-items">
-                            <ul class="list-unstyled">
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="heading3">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse3"
-                                aria-expanded="true" aria-controls="collapse3">
-                          Principles UI/UX Design <sub class="ms-2">/ 3 hours 10min</sub>
-                        </button>
-                      </h2>
-                      <div id="collapse3" class="accordion-collapse collapse "
-                           aria-labelledby="heading3" data-bs-parent="#accordion-course">
-                        <div class="accordion-body">
-                          <div class="lesson-items">
-                            <ul class="list-unstyled">
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="heading4">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse4"
-                                aria-expanded="true" aria-controls="collapse4">
-                          User Research Techniques <sub class="ms-2">/ 3 hours 10min</sub>
-                        </button>
-                      </h2>
-                      <div id="collapse4" class="accordion-collapse collapse "
-                           aria-labelledby="heading4" data-bs-parent="#accordion-course">
-                        <div class="accordion-body">
-                          <div class="lesson-items">
-                            <ul class="list-unstyled">
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="heading5">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse5"
-                                aria-expanded="true" aria-controls="collapse5">
-                          Creating User Personal <sub class="ms-2">/ 3 hours 10min</sub>
-                        </button>
-                      </h2>
-                      <div id="collapse5" class="accordion-collapse collapse "
-                           aria-labelledby="heading5" data-bs-parent="#accordion-course">
-                        <div class="accordion-body">
-                          <div class="lesson-items">
-                            <ul class="list-unstyled">
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="heading6">
-                        <button class="accordion-button collapsed" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#collapse6"
-                                aria-expanded="true" aria-controls="collapse6">
-                          User Research Techniques <sub class="ms-2">/ 3 hours 10min</sub>
-                        </button>
-                      </h2>
-                      <div id="collapse6" class="accordion-collapse collapse "
-                           aria-labelledby="heading6" data-bs-parent="#accordion-course">
-                        <div class="accordion-body">
-                          <div class="lesson-items">
-                            <ul class="list-unstyled">
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-3.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
+
                 <div class="inner-sec" id="instructor">
                   <h2 class="display-4">Instructor</h2>
                   <div
@@ -491,6 +242,7 @@ Persona Development
                     </div>
                   </div>
                 </div>
+
                 <div class="inner-sec" id="review">
                   <h2 class="display-4">Đánh Giá</h2>
                   <div class="entry-comments mt-5">

@@ -45,7 +45,7 @@ const renderReviews = (reviews) => {
               <div class="d-flex justify-content-between mb-3">
                 <div class="comment-head">
                   <h4 class="display-5 mb-0">${review.user.full_name}</h4>
-                  <small class="text-muted">${formatDate(review.createAt)}</small>
+                  <small class="text-muted">${formatDate(review.createdAt)}</small>
                 </div>
                 <div class="ratings pt-2">${renderStars(review.rating)}</div>
               </div>

@@ -38,6 +38,9 @@ class CourseOnlineProjetcFinfalApplicationTests {
   @Autowired
   private SectionRepository sectionRepository;
 
+  @Autowired
+  private LessonRepository lessonRepository;
+
 
   @Test
   void contextLoads() {
@@ -228,14 +231,12 @@ class CourseOnlineProjetcFinfalApplicationTests {
   @Test
   void save_section() {
     Faker faker = new Faker();
-    Random rd = new Random();
     Slugify slugify = Slugify.builder().build();
     List<Course> courses = courseRepository.findAll();
 
     for (Course course : courses) {
-      String title = faker.book().title();
-
       for (int i = 1; i < 10; i++) {
+        String title = faker.book().title();
         Section section = Section.builder()
             .title(title)
             .slug(slugify.slugify(title))
@@ -247,6 +248,34 @@ class CourseOnlineProjetcFinfalApplicationTests {
             .course(course)
             .build();
         sectionRepository.save(section);
+      }
+    }
+  }
+
+  @Test
+  void save_lesson() {
+    Faker faker = new Faker();
+    Random rd = new Random();
+    Slugify slugify = Slugify.builder().build();
+    List<Section> sections = sectionRepository.findAll();
+
+    for (Section section : sections) {
+      for (int i = 1; i < 4; i++) {
+        String title = faker.book().title();
+        Lesson lesson = Lesson.builder()
+            .title(title)
+            .slug(slugify.slugify(title))
+            .content(faker.lorem().paragraph(50))
+            .video_url("https://youtu.be/RmukB_z7WWc?si=6nWvYJYb2RiiGbxF")
+            .displayOrder(i)
+            .status(true)
+            .duration(rd.nextInt(31) + 30)
+            .created_at(LocalDateTime.now())
+            .updated_at(LocalDateTime.now())
+            .published_at(LocalDateTime.now())
+            .section(section)
+            .build();
+        lessonRepository.save(lesson);
       }
     }
   }

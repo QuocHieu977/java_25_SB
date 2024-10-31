@@ -152,7 +152,7 @@
 </script>
 
 <script>
-  const formResetPasswordEL = document.getElementById("form-rest-password");
+  const formResetPasswordEL = document.getElementById("form-reset-password");
   const passwordNewEL = document.getElementById("passwordNew");
   const passwordConfirmEL = document.getElementById("confirmPassword");
 
@@ -204,7 +204,7 @@
       const res = await axios.post('/api/auth/reset-password', request);
       toastr.success("Đổi mật khẩu thành công!");
       setTimeout(() => {
-        window.location.href = '/dang-nhap.html';
+        window.location.href = '/dang-nhap';
       }, 1000);
     } catch (e) {
       toastr.error(e.response.data.message);

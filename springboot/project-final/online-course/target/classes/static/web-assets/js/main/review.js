@@ -7,6 +7,22 @@ const formatDate = dateString => {
   return `${day}-${month}-${year}`;
 }
 
+const renderStars = (rating) => {
+  let starsHtml = '';
+
+  // Hiển thị số ngôi sao đầy dựa trên rating
+  for (let i = 0; i < rating; i++) {
+    starsHtml += '<img src="/web-assets/images/icons/star.png" alt="Star">';
+  }
+
+  // Hiển thị ngôi sao trống nếu rating nhỏ hơn 5
+  for (let i = rating; i < 5; i++) {
+    starsHtml += '<img src="/web-assets/images/icons/star-nil.png" alt="Empty Star">';
+  }
+
+  return starsHtml;
+}
+
 const reviewListEl = document.querySelector(".comment-list");
 const renderReviews = (reviews) => {
   if (reviews.length === 0) {
@@ -29,11 +45,9 @@ const renderReviews = (reviews) => {
               <div class="d-flex justify-content-between mb-3">
                 <div class="comment-head">
                   <h4 class="display-5 mb-0">${review.user.full_name}</h4>
-                  <small class="text-muted">${formatDate(review.createAt)}</small>
+                  <small class="text-muted">${formatDate(review.createdAt)}</small>
                 </div>
-                <div class="ratings pt-2">
-                    <img src="/web-assets/images/icons/star.png" alt="Star">
-                </div>
+                <div class="ratings pt-2">${renderStars(review.rating)}</div>
               </div>
               <p>${review.content}</p>
             </div>
