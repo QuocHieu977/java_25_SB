@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SectionRepository extends JpaRepository<Section, Integer> {
 
-  List<Section> findByCourseIdAndStatus(Integer id, Boolean status);
+  List<Section> findByCourseIdAndStatusOrderByDisplayOrderDesc(Integer id, Boolean status);
 }

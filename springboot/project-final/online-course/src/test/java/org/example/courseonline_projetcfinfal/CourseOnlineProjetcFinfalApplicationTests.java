@@ -269,7 +269,7 @@ class CourseOnlineProjetcFinfalApplicationTests {
             .video_url("https://youtu.be/RmukB_z7WWc?si=6nWvYJYb2RiiGbxF")
             .displayOrder(i)
             .status(true)
-            .duration(rd.nextInt(31) + 30)
+            .duration(Math.round((rd.nextDouble(31) + 30) * 100.0) / 100.0)
             .created_at(LocalDateTime.now())
             .updated_at(LocalDateTime.now())
             .published_at(LocalDateTime.now())

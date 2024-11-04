@@ -29,7 +29,7 @@ public class Lesson {
 
   String video_url;
   Integer displayOrder;
-  Integer duration;
+  Double duration;
   Boolean status;
   LocalDateTime created_at;
   LocalDateTime updated_at;

@@ -175,33 +175,16 @@
                           <div class="lesson-items">
                             <ul class="list-unstyled">
                               <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
+                                     class="d-flex justify-content-between align-items-center"
+                                     th:each="lesson: ${lessons.get(section.id)}">
                                 <span class="lesson-title">
-                                  <img src="/web-assets/images/icons/video.png" alt="Video">Persona Development
+                                  <img src="/web-assets/images/icons/video.png" alt="Video">
+                                  <span th:text="${lesson.title}"></span>
                                 </span>
-                                <span>51.08<img src="/web-assets/images/icons/lock.png" alt="Lock"></span></a>
-                              </li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
                                 <span>
-3.32
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-2.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
+                                  <span th:text="${lesson.duration}"></span>
+                                  <img src="/web-assets/images/icons/lock.png"
+                                       alt="Lock"></span>
                               </a></li>
                             </ul>
                           </div>

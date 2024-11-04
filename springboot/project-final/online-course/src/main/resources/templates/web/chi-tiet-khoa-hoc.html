@@ -81,18 +81,18 @@
                 <h6>Đánh Giá</h6>
                 <div class="d-flex align-items-center">
                   <div class="ratings">
-                    <img src="/web-assets/images/icons/star.png" alt>
-                    <img src="/web-assets/images/icons/star.png" alt>
-                    <img src="/web-assets/images/icons/star.png" alt>
-                    <img src="/web-assets/images/icons/star.png" alt>
-                    <img src="/web-assets/images/icons/star.png" alt>
+                    <th:block
+                        th:each="i : ${#numbers.sequence(1, T(java.lang.Math).round(course.rating))}">
+                      <a href="#"><img src="/web-assets/images/icons/star.png" alt="Star"/></a>
+                    </th:block>
                   </div>
-                  <span>(03 Reviews)</span>
+                  <span th:text="${'(' + reviews.size()} + ' Đánh Giá)'">(03 Reviews)</span>
                 </div>
               </div>
               <div class="course-cat">
                 <h6>Thể Loại</h6>
-                <span class="mute-alt">UI/UX Design</span>
+                <span class="mute-alt"
+                      th:text="${course.category.name}">UI/UX Design</span>
               </div>
             </div>
 
@@ -101,19 +101,19 @@
                 <ul class="nav nav-pills">
                   <li class="nav-item">
                     <a class="nav-link" href="#overview"><i class="feather-icon icon-bookmark"></i>
-                      Overview</a>
+                      Giới Thiệu</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#course"><i class="feather-icon icon-box"></i>
-                      Curriculum</a>
+                      Chương Trình</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#instructor"><i class="feather-icon icon-user"></i>
-                      Instructor</a>
+                      Giảng Viên</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#review"><i
-                        class="feather-icon icon-star"></i>Review</a>
+                        class="feather-icon icon-star"></i>Đánh Giá</a>
                   </li>
                 </ul>
               </nav>
@@ -121,7 +121,7 @@
                    class="scrollspy-example" tabindex="0">
                 <div class="inner-sec" id="overview">
                   <h2 class="display-4 fw-bold">
-                    Course Overview
+                    Giới Thiệu Khoá Học
                   </h2>
                   <p>Acknowledge any challenges or concerns related to implementing in education.
                     Discuss
@@ -175,33 +175,16 @@
                           <div class="lesson-items">
                             <ul class="list-unstyled">
                               <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
+                                     class="d-flex justify-content-between align-items-center"
+                                     th:each="lesson: ${lessons.get(section.id)}">
                                 <span class="lesson-title">
-                                  <img src="/web-assets/images/icons/video.png" alt="Video">Persona Development
+                                  <img src="/web-assets/images/icons/video.png" alt="Video">
+                                  <span th:text="${lesson.title}"></span>
                                 </span>
-                                <span>51.08<img src="/web-assets/images/icons/lock.png" alt="Lock"></span></a>
-                              </li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-User Research
-</span>
                                 <span>
-3.32
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
-                              </a></li>
-                              <li><a href="#"
-                                     class="d-flex justify-content-between align-items-center">
-<span class="lesson-title">
-<img src="/web-assets/images/icons/video.png" alt="Video">
-Persona Development
-</span>
-                                <span>
-2.08
-<img src="/web-assets/images/icons/lock.png" alt="Lock">
-</span>
+                                  <span th:text="${lesson.duration}"></span>
+                                  <img src="/web-assets/images/icons/lock.png"
+                                       alt="Lock"></span>
                               </a></li>
                             </ul>
                           </div>
@@ -213,7 +196,7 @@ Persona Development
                 </div>
 
                 <div class="inner-sec" id="instructor">
-                  <h2 class="display-4">Instructor</h2>
+                  <h2 class="display-4">Giảng Viên</h2>
                   <div
                       class="author-card d-md-flex align-items-center border rounded-2 bg-shade p-3">
                     <div class="author-img">

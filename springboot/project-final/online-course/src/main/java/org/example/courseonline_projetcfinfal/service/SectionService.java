@@ -13,6 +13,6 @@ public class SectionService {
   private final SectionRepository sectionRepository;
 
   public List<Section> getSectionByCourseId(Integer id) {
-    return sectionRepository.findByCourseIdAndStatus(id, true);
+    return sectionRepository.findByCourseIdAndStatusOrderByDisplayOrderDesc(id, true);
   }
 }

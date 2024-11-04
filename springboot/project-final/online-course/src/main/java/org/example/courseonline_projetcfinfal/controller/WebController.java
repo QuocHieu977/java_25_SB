@@ -1,12 +1,15 @@
 package org.example.courseonline_projetcfinfal.controller;
 
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.example.courseonline_projetcfinfal.entity.Category;
 import org.example.courseonline_projetcfinfal.entity.Course;
+import org.example.courseonline_projetcfinfal.entity.Lesson;
 import org.example.courseonline_projetcfinfal.entity.Review;
 import org.example.courseonline_projetcfinfal.entity.Section;
 import org.example.courseonline_projetcfinfal.service.CategoryService;
 import org.example.courseonline_projetcfinfal.service.CourseService;
+import org.example.courseonline_projetcfinfal.service.LessonService;
 import org.example.courseonline_projetcfinfal.service.ReviewService;
 import org.example.courseonline_projetcfinfal.service.SectionService;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,7 @@ public class WebController {
   private final CategoryService categoryService;
   private final ReviewService reviewService;
   private final SectionService sectionService;
+  private final LessonService lessonService;
 
   @ModelAttribute("categories")
   public List<Category> getCategories() {
@@ -52,7 +56,10 @@ public class WebController {
 
     List<Section> sections = sectionService.getSectionByCourseId(course.getId());
     model.addAttribute("sections", sections);
-    
+
+    Map<Integer, List<Lesson>> lessons = lessonService.getLessonBySectionId(sections);
+    model.addAttribute("lessons", lessons);
+
     return "web/chi-tiet-khoa-hoc";
   }
 }
